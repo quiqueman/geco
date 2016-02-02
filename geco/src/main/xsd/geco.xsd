@@ -1,0 +1,109 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="geco">
+        <xs:annotation>
+            <xs:documentation>XML de ejemplo</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="passwords">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="category" maxOccurs="unbounded" minOccurs="0">
+                                <xs:complexType mixed="true">
+                                    <xs:sequence>
+                                        <xs:element name="site" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element type="xs:string" name="details"/>
+                                                </xs:sequence>
+                                                <xs:attribute type="xs:string" name="name"/>
+                                                <xs:attribute type="xs:string" name="url"/>
+                                                <xs:attribute type="xs:string" name="username"/>
+                                                <xs:attribute type="xs:string" name="password"/>
+                                                <xs:attribute type="xs:string" name="confirmation"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute type="xs:string" name="title" use="optional"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="finances">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="insurances">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="firm">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="policy">
+                                                        <xs:complexType>
+                                                            <xs:simpleContent>
+                                                                <xs:extension base="xs:string">
+                                                                    <xs:attribute type="xs:string" name="description"/>
+                                                                    <xs:attribute type="xs:string" name="nominal"/>
+                                                                    <xs:attribute type="xs:string" name="contact"/>
+                                                                </xs:extension>
+                                                            </xs:simpleContent>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                                <xs:attribute type="xs:string" name="name"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="savings">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="bank">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="account">
+                                                        <xs:complexType>
+                                                            <xs:simpleContent>
+                                                                <xs:extension base="xs:string">
+                                                                    <xs:attribute type="xs:string" name="description"/>
+                                                                    <xs:attribute type="xs:string" name="id"/>
+                                                                    <xs:attribute type="xs:string" name="balance"/>
+                                                                    <xs:attribute type="xs:string" name="lastUpdated"/>
+                                                                </xs:extension>
+                                                            </xs:simpleContent>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                                <xs:attribute type="xs:string" name="name"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="encryptedVolumes">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="volumen">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute type="xs:string" name="name"/>
+                                            <xs:attribute type="xs:string" name="path"/>
+                                            <xs:attribute type="xs:string" name="description"/>
+                                            <xs:attribute type="xs:string" name="password"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

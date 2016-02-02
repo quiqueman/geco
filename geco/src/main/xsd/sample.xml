@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    XML de ejemplo
+-->
+
+
+<geco>
+    <passwords>
+        <category title="bancos">
+            <site name="bankinter" url="https://www.bankinter.com/www/es-es/cgi/ebk+opr+extractointegral" username="egonzalez" password="e1ldlmdcnnqa" confirmation="tarjeta de claves">
+                <details><![CDATA[
+                        aquí podría ir la tarjeta de claves ¿se podría escanear? ¿como tabla html?
+                        ]]>
+                </details>               
+            </site>
+        </category>
+        <category title="Redes Sociales"></category>
+        <category title="Correo"></category>
+    </passwords>
+    <finances>
+        <insurances>
+            <firm name="">
+                <policy description="" nominal="" contact=""/>
+            </firm>
+        </insurances>
+        <savings>
+            <bank name="">
+                <account description="" id="" balance="" lastUpdated=""/>
+            </bank>
+        </savings>
+    </finances>
+    <encryptedVolumes>
+        <volumen name="" path="" description="" password=""/>
+    </encryptedVolumes>
+</geco>
