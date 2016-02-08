@@ -57,9 +57,9 @@
                         <phase>package</phase>
                         <configuration>
                             <target>
-                                <zip destfile="${build.directory}/${project.build.finalName}.zip">
-                                    <zipfileset dir="${build.directory}" includes="lib/**" />
-                                    <zipfileset dir="${build.directory}" includes="${project.build.finalName}.jar" />
+                                <zip destfile="${project.build.directory}/${project.build.finalName}.zip">
+                                    <zipfileset dir="${project.build.directory}" includes="lib/**" />
+                                    <zipfileset dir="${project.build.directory}" includes="${project.build.finalName}.jar" />
                                     <zipfileset dir="${basedir}" includes="readme.txt" />
                                 </zip>
                             </target>
@@ -83,8 +83,13 @@
                     </execution>
                 </executions>
                 <configuration>
-                   <!-- The name of your generated source package -->
-                    <arguments>-extension -npa -b ${project.basedir}/src/main/xsd/geco.xjb</arguments> 
+                    <!-- The name of your generated source package -->
+                    <xjbSources>
+                        <xjbSource>src/main/resources/geco.xjb</xjbSource>
+                    </xjbSources>                   
+                    <packageName>es.kinitrojavatech.geco.xml</packageName>
+                    <addGeneratedAnnotation>true</addGeneratedAnnotation>
+                    <extension>true</extension>
                 </configuration>
             </plugin>             
         </plugins>

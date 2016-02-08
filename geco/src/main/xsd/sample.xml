@@ -6,15 +6,34 @@
 
 <geco>
     <passwords>
-        <category title="bancos">
+        <category title="Bancos">
             <site name="bankinter" url="https://www.bankinter.com/www/es-es/cgi/ebk+opr+extractointegral" username="egonzalez" password="e1ldlmdcnnqa" confirmation="tarjeta de claves">
                 <details><![CDATA[
                         aquí podría ir la tarjeta de claves ¿se podría escanear? ¿como tabla html?
                         ]]>
                 </details>               
             </site>
+            <site name="ing" url="https://www.ingdirect.es" username="egonzalez" password="e1ldlmdcnnqa" confirmation="tarjeta de claves">
+                <details><![CDATA[
+                        aquí podría ir la tarjeta de claves ¿se podría escanear? ¿como tabla html?
+                        ]]>
+                </details>               
+            </site>
         </category>
-        <category title="Redes Sociales"></category>
+        <category title="Redes Sociales">
+			<site name="bankinter" url="https://www.bankinter.com/www/es-es/cgi/ebk+opr+extractointegral" username="egonzalez" password="e1ldlmdcnnqa" confirmation="tarjeta de claves">
+                <details><![CDATA[
+                        aquí podría ir la tarjeta de claves ¿se podría escanear? ¿como tabla html?
+                        ]]>
+                </details>               
+            </site>
+            <site name="ing" url="https://www.ingdirect.es" username="egonzalez" password="e1ldlmdcnnqa" confirmation="tarjeta de claves">
+                <details><![CDATA[
+                        aquí podría ir la tarjeta de claves ¿se podría escanear? ¿como tabla html?
+                        ]]>
+                </details>               
+            </site>
+        </category>
         <category title="Correo"></category>
     </passwords>
     <finances>

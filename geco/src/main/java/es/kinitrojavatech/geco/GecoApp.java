@@ -5,6 +5,15 @@
  */
 package es.kinitrojavatech.geco;
 
+import es.kinitrojavatech.geco.data.DataFile;
+import es.kinitrojavatech.geco.gui.JPanelPassword;
+import es.kinitrojavatech.geco.gui.JPanelPasswords;
+import es.kinitrojavatech.geco.xml.Category;
+import es.kinitrojavatech.geco.xml.Site;
+import java.util.List;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author quique
@@ -15,7 +24,6 @@ public class GecoApp extends javax.swing.JFrame {
      * Creates new form GecoApp
      */
     public GecoApp() {
-        initComponents();
     }
 
     /**
@@ -29,6 +37,7 @@ public class GecoApp extends javax.swing.JFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanelPasswd = new javax.swing.JPanel();
+        jTabbedPanePasswdCategories = new javax.swing.JTabbedPane();
         jPanelAccounts = new javax.swing.JPanel();
         jPanelEncFs = new javax.swing.JPanel();
         jPanelAbout = new javax.swing.JPanel();
@@ -56,15 +65,30 @@ public class GecoApp extends javax.swing.JFrame {
 
         jPanelPasswd.setName("jPanelPasswd"); // NOI18N
 
+        jTabbedPanePasswdCategories.setMaximumSize(null);
+        jTabbedPanePasswdCategories.setMinimumSize(null);
+        jTabbedPanePasswdCategories.setName("jTabbedPanePasswdCategories"); // NOI18N
+        jTabbedPanePasswdCategories.setPreferredSize(null);
+
         javax.swing.GroupLayout jPanelPasswdLayout = new javax.swing.GroupLayout(jPanelPasswd);
         jPanelPasswd.setLayout(jPanelPasswdLayout);
         jPanelPasswdLayout.setHorizontalGroup(
             jPanelPasswdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 795, Short.MAX_VALUE)
+            .addGroup(jPanelPasswdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelPasswdLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jTabbedPanePasswdCategories, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanelPasswdLayout.setVerticalGroup(
             jPanelPasswdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 452, Short.MAX_VALUE)
+            .addGroup(jPanelPasswdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelPasswdLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jTabbedPanePasswdCategories, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab(bundle.getString("GecoApp.jPanelPasswd.TabConstraints.tabTitle"), jPanelPasswd); // NOI18N
@@ -231,10 +255,17 @@ public class GecoApp extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GecoApp().setVisible(true);
+                GecoApp app = new GecoApp();
+                if (app.openDatafile()) {
+                    app.initComponents();
+                    app.initPanelPasswords();
+                    app.setVisible(true);
+                }
             }
         });
     }
+
+    private DataFile dataFile;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JMenuItem aboutMenuItem;
@@ -251,6 +282,7 @@ public class GecoApp extends javax.swing.JFrame {
     javax.swing.JPanel jPanelEncFs;
     javax.swing.JPanel jPanelPasswd;
     javax.swing.JTabbedPane jTabbedPane1;
+    javax.swing.JTabbedPane jTabbedPanePasswdCategories;
     javax.swing.JMenuBar menuBar;
     javax.swing.JMenuItem openMenuItem;
     javax.swing.JMenuItem pasteMenuItem;
@@ -258,4 +290,28 @@ public class GecoApp extends javax.swing.JFrame {
     javax.swing.JMenuItem saveMenuItem;
     // End of variables declaration//GEN-END:variables
 
+    private boolean openDatafile() {
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Ficheros de datos de geco", "geco");
+        chooser.setFileFilter(filter);
+        int returnVal = chooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            dataFile = new DataFile(chooser.getSelectedFile());
+            return dataFile.open();
+        }
+        return false;
+    }
+
+    private void initPanelPasswords() {
+        List<Category> categories = dataFile.getData().getPasswords().getCategory();
+
+        for (Category category : categories) {
+            JPanelPasswords panel = new JPanelPasswords();
+            jTabbedPanePasswdCategories.add(category.getTitle(), panel);
+            for (Object object : category.getSite()) {
+                Site site = (Site) object;
+                JPanelPassword panelPassword = new JPanelPassword(site.getUrl(), site.getUsername(), site.getPassword(), site.getDetails());
+            }
+        }
+    }
 }
