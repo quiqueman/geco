@@ -84,12 +84,10 @@
                 </executions>
                 <configuration>
                     <!-- The name of your generated source package -->
-                    <xjbSources>
-                        <xjbSource>src/main/resources/geco.xjb</xjbSource>
-                    </xjbSources>                   
+                    <sources>
+                        <source>src/main/resources/geco.xsd</source>
+                    </sources>                   
                     <packageName>es.kinitrojavatech.geco.xml</packageName>
-                    <addGeneratedAnnotation>true</addGeneratedAnnotation>
-                    <extension>true</extension>
                 </configuration>
             </plugin>             
         </plugins>

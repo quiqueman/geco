@@ -259,6 +259,7 @@ public class GecoApp extends javax.swing.JFrame {
                 if (app.openDatafile()) {
                     app.initComponents();
                     app.initPanelPasswords();
+                    app.pack();
                     app.setVisible(true);
                 }
             }
@@ -308,9 +309,12 @@ public class GecoApp extends javax.swing.JFrame {
         for (Category category : categories) {
             JPanelPasswords panel = new JPanelPasswords();
             jTabbedPanePasswdCategories.add(category.getTitle(), panel);
-            for (Object object : category.getSite()) {
-                Site site = (Site) object;
-                JPanelPassword panelPassword = new JPanelPassword(site.getUrl(), site.getUsername(), site.getPassword(), site.getDetails());
+            for (Object object : category.getContent()) {
+                if (object instanceof Site) {
+                    Site site = (Site) object;
+                    JPanelPassword panelPassword = new JPanelPassword(site.getName(), site.getUrl(), site.getUsername(), site.getPassword(), site.getDetails());
+                    panel.add(panelPassword);
+                }
             }
         }
     }

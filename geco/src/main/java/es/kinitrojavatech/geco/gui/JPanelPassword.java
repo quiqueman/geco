@@ -5,21 +5,32 @@
  */
 package es.kinitrojavatech.geco.gui;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+
 /**
  *
  * @author quique
  */
 public class JPanelPassword extends javax.swing.JPanel {
 
+    private String siteName;
+
     /**
      * Creates new form jPanelSite
      */
-    public JPanelPassword(String url, String user, String password, String optionalInfo) {
+    public JPanelPassword(String name, String url, String user, String password, String optionalInfo) {
         initComponents();
+        siteName = name;
         jTextFieldUrl.setText(url);
         jTextFieldUser.setText(user);
         jPasswordField.setText(password);
         jTextAreaOptionalInfo.setText(optionalInfo);
+    }
+
+    public String getSiteName() {
+        return siteName;
     }
 
     /**
@@ -47,18 +58,22 @@ public class JPanelPassword extends javax.swing.JPanel {
         jLabel3.setText("Password:");
 
         jButtonCopyUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/es/kinitrojavatech/geco/gui/edit-copy.png"))); // NOI18N
+        jButtonCopyUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCopyUserActionPerformed(evt);
+            }
+        });
 
         jButtonCopyPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/es/kinitrojavatech/geco/gui/edit-copy.png"))); // NOI18N
+        jButtonCopyPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCopyPasswordActionPerformed(evt);
+            }
+        });
 
         jTextAreaOptionalInfo.setColumns(20);
         jTextAreaOptionalInfo.setRows(5);
         jScrollPane1.setViewportView(jTextAreaOptionalInfo);
-
-        jPasswordField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordFieldActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("URL:");
 
@@ -69,30 +84,32 @@ public class JPanelPassword extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-                            .addComponent(jTextFieldUser))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonCopyUser)
-                            .addComponent(jButtonCopyPassword))
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldUrl)))
+                        .addComponent(jTextFieldUrl))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jPasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldUser))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonCopyUser)
+                                    .addComponent(jButtonCopyPassword))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addContainerGap(32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldUrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -111,14 +128,24 @@ public class JPanelPassword extends javax.swing.JPanel {
                             .addComponent(jLabel3)
                             .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordFieldActionPerformed
+    private void jButtonCopyUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCopyUserActionPerformed
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        StringSelection data = new StringSelection(jTextFieldUser.getText());
+        clipboard.setContents(data, data);
+        System.err.println("copiado al portapapeles: " + clipboard.getContents(null));
+    }//GEN-LAST:event_jButtonCopyUserActionPerformed
+
+    private void jButtonCopyPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCopyPasswordActionPerformed
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        StringSelection data = new StringSelection(String.valueOf(jPasswordField.getPassword()));
+        clipboard.setContents(data, data);
+        System.err.println("copiado al portapapeles: " + clipboard.getContents(null));
+    }//GEN-LAST:event_jButtonCopyPasswordActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
