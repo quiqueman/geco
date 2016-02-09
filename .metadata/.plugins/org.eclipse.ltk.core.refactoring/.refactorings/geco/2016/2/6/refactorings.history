@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Extract method &apos;private void copyGuiData()&apos; from &apos;es.kinitrojavatech.geco.gui.JPanelPassword.jButtonUpdateActionPerformed()&apos; to &apos;es.kinitrojavatech.geco.gui.JPanelPassword&apos;&#x0A;- Original project: &apos;geco&apos;&#x0A;- Method name: &apos;copyGuiData&apos;&#x0A;- Destination type: &apos;es.kinitrojavatech.geco.gui.JPanelPassword&apos;&#x0A;- Declared visibility: &apos;private&apos;" comments="false" description="Extract method &apos;copyGuiData&apos;" destination="0" exceptions="false" flags="786434" id="org.eclipse.jdt.ui.extract.method" input="/src\/main\/java&lt;es.kinitrojavatech.geco.gui{JPanelPassword.java" name="copyGuiData" replace="false" selection="8375 222" stamp="1455054032486" version="1.0" visibility="2"/>
+</session>

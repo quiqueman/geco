@@ -5,6 +5,9 @@
  */
 package es.kinitrojavatech.geco.gui;
 
+import es.kinitrojavatech.geco.xml.Category;
+import es.kinitrojavatech.geco.xml.Site;
+
 /**
  *
  * @author quique
@@ -14,16 +17,23 @@ public class JPanelPasswords extends javax.swing.JPanel {
 	/**
 	 * Creates new form JPanelSites
 	 */
-	public JPanelPasswords() {
+	public JPanelPasswords(final Category category) {
 		initComponents();
+		addEmptySite(category);
+		for (final Site site : category.getSite()) {
+			addSite(category, site);
+		}
 	}
 
-	public void add(final JPanelPassword panel) {
-		String name = panel.getSiteName();
-		if (name == null) {
-			name = "Nuevo Site";
-		}
-		jTabbedPane1.add(name, panel);
+	public void addSite(final Category category, final Site site) {
+		final JPanelPassword panelPassword = new JPanelPassword(this, category, site);
+		jTabbedPane1.add(panelPassword.getSiteName(), panelPassword);
+
+	}
+
+	private void addEmptySite(final Category category) {
+		final JPanelPassword panelPassword = new JPanelPassword(this, category, new Site());
+		jTabbedPane1.add("Nuevo Site", panelPassword);
 	}
 
 	/**
