@@ -14,7 +14,7 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="category">
-    <xs:complexType mixed="true">
+    <xs:complexType>
       <xs:sequence>
         <xs:element ref="site" maxOccurs="unbounded" minOccurs="0"/>
       </xs:sequence>
