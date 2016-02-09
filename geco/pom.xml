@@ -1,95 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <groupId>es.kinitrojavatech</groupId>
-    <artifactId>geco</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+	<groupId>es.kinitrojavatech</groupId>
+	<artifactId>geco</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
-    <dependencies>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
-        </dependency>
-    </dependencies>
+	<dependencies>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+	</dependencies>
 
-    <build>
-        <finalName>${project.artifactId}</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>EntryPoint</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.7</version>
-                <executions>
-                    <execution>
-                        <id>pack</id>
-                        <phase>package</phase>
-                        <configuration>
-                            <target>
-                                <zip destfile="${project.build.directory}/${project.build.finalName}.zip">
-                                    <zipfileset dir="${project.build.directory}" includes="lib/**" />
-                                    <zipfileset dir="${project.build.directory}" includes="${project.build.finalName}.jar" />
-                                    <zipfileset dir="${basedir}" includes="readme.txt" />
-                                </zip>
-                            </target>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- Plugin required to build java classes from XSD using XJC -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jaxb2-maven-plugin</artifactId>
-                <version>1.5</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>xjc</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <!-- The name of your generated source package -->
-                    <sources>
-                        <source>src/main/resources/geco.xsd</source>
-                    </sources>                   
-                    <packageName>es.kinitrojavatech.geco.xml</packageName>
-                </configuration>
-            </plugin>             
-        </plugins>
-    </build>
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<!-- we want JDK 1.7 source and binary compatiblility -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>EntryPoint</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/lib</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<id>pack</id>
+						<phase>package</phase>
+						<configuration>
+							<target>
+								<zip destfile="${project.build.directory}/${project.build.finalName}.zip">
+									<zipfileset dir="${project.build.directory}"
+										includes="lib/**" />
+									<zipfileset dir="${project.build.directory}"
+										includes="${project.build.finalName}.jar" />
+									<zipfileset dir="${basedir}" includes="readme.txt" />
+								</zip>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Plugin required to build java classes from XSD using XJC -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxb2-maven-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<!-- The name of your generated source package -->
+					<sources>
+						<source>src/main/resources/geco.xsd</source>
+					</sources>
+					<packageName>es.kinitrojavatech.geco.xml</packageName>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<description>Gestor de contraseñas</description>
+	<name>Geco</name>
+	<url>https://github.com/quiqueman/geco</url>
+	<organization>
+		<name>Kínitro JavaTech</name>
+	</organization>
 </project>
