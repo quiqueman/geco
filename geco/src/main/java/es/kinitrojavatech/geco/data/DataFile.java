@@ -23,9 +23,18 @@ public class DataFile {
 
     File file;
     Geco xml;
+    boolean modified;
 
     public DataFile(File file) {
         this.file = file;
+    }
+    
+    public void setModified(boolean modified) {
+        this.modified = modified;        
+    }
+    
+    public boolean isModified() {
+        return modified;
     }
 
     public void save() {
