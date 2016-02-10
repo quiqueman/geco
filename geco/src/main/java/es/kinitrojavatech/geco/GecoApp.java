@@ -225,12 +225,14 @@ public class GecoApp extends javax.swing.JFrame {
 	private void jButtonNewPasswdCatetoryActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonNewPasswdCatetoryActionPerformed
 		final String name = JOptionPane.showInputDialog(this, "Nombre de la nueva categoría", "Nueva Categoría",
 				JOptionPane.QUESTION_MESSAGE);
-		final Category category = new Category();
-		category.setTitle(name);
-		dataFile.getData().getPasswords().getCategory().add(category);
-		final JPanelCategory newPanel = new JPanelCategory(category);
-		jTabbedPanePasswdCategories.add(category.getTitle(), newPanel);
-		pack();
+		if (name != null) {
+			final Category category = new Category();
+			category.setTitle(name);
+			dataFile.getData().getPasswords().getCategory().add(category);
+			final JPanelCategory newPanel = new JPanelCategory(category);
+			jTabbedPanePasswdCategories.add(category.getTitle(), newPanel);
+			pack();
+		}
 	}// GEN-LAST:event_jButtonNewPasswdCatetoryActionPerformed
 
 	private void jButtonSaveActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonSaveActionPerformed
