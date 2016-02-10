@@ -46,7 +46,7 @@ public class DataFile {
 	String password;
 	Geco xml;
 
-	/** builda new datafile with empty data */
+	/** build a new datafile with empty data */
 	public DataFile() {
 		xml = new Geco();
 		xml.setPasswords(new Passwords());

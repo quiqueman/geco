@@ -5,6 +5,7 @@
  */
 package es.kinitrojavatech.geco;
 
+import java.io.File;
 import java.util.List;
 
 import javax.swing.JFileChooser;
@@ -40,6 +41,7 @@ public class GecoApp extends javax.swing.JFrame {
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
+	// <editor-fold defaultstate="collapsed" desc="Generated
 	// Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
@@ -53,6 +55,8 @@ public class GecoApp extends javax.swing.JFrame {
 		jPanelAccounts = new javax.swing.JPanel();
 		jPanelEncFs = new javax.swing.JPanel();
 		jPanelAbout = new javax.swing.JPanel();
+		jPanel1 = new javax.swing.JPanel();
+		jLabelFilename = new javax.swing.JLabel();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 		final java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("es/kinitrojavatech/geco/Bundle"); // NOI18N
@@ -128,7 +132,7 @@ public class GecoApp extends javax.swing.JFrame {
 										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addGap(0, 0, Short.MAX_VALUE))));
 		jPanelCategoryLayout.setVerticalGroup(jPanelCategoryLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 442, Short.MAX_VALUE)
+				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 342, Short.MAX_VALUE)
 				.addGroup(jPanelCategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 						.addGroup(jPanelCategoryLayout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE)
 								.addComponent(jTabbedPanePasswdCategories, javax.swing.GroupLayout.PREFERRED_SIZE,
@@ -144,7 +148,7 @@ public class GecoApp extends javax.swing.JFrame {
 		jPanelAccountsLayout.setHorizontalGroup(jPanelAccountsLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 795, Short.MAX_VALUE));
 		jPanelAccountsLayout.setVerticalGroup(jPanelAccountsLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 442, Short.MAX_VALUE));
+				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 342, Short.MAX_VALUE));
 
 		jTabbedPane1.addTab(bundle.getString("GecoApp.jPanelAccounts.TabConstraints.tabTitle"), jPanelAccounts); // NOI18N
 
@@ -155,7 +159,7 @@ public class GecoApp extends javax.swing.JFrame {
 		jPanelEncFsLayout.setHorizontalGroup(jPanelEncFsLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 795, Short.MAX_VALUE));
 		jPanelEncFsLayout.setVerticalGroup(jPanelEncFsLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 442, Short.MAX_VALUE));
+				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 342, Short.MAX_VALUE));
 
 		jTabbedPane1.addTab(bundle.getString("GecoApp.jPanelEncFs.TabConstraints.tabTitle"), jPanelEncFs); // NOI18N
 
@@ -166,11 +170,31 @@ public class GecoApp extends javax.swing.JFrame {
 		jPanelAboutLayout.setHorizontalGroup(jPanelAboutLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 795, Short.MAX_VALUE));
 		jPanelAboutLayout.setVerticalGroup(jPanelAboutLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 442, Short.MAX_VALUE));
+				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 342, Short.MAX_VALUE));
 
 		jTabbedPane1.addTab(bundle.getString("GecoApp.jPanelAbout.TabConstraints.tabTitle"), jPanelAbout); // NOI18N
 
 		getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
+
+		jPanel1.setName("jPanel1"); // NOI18N
+
+		jLabelFilename.setText(bundle.getString("GecoApp.jLabelFilename.text")); // NOI18N
+		jLabelFilename.setName("jLabelFilename"); // NOI18N
+
+		final javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+		jPanel1.setLayout(jPanel1Layout);
+		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGap(0, 800, Short.MAX_VALUE)
+				.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(jPanel1Layout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE)
+								.addComponent(jLabelFilename).addGap(0, 0, Short.MAX_VALUE))));
+		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGap(0, 100, Short.MAX_VALUE)
+				.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(jPanel1Layout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE)
+								.addComponent(jLabelFilename).addGap(0, 0, Short.MAX_VALUE))));
+
+		getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
 
 		pack();
 		setLocationRelativeTo(null);
@@ -178,9 +202,15 @@ public class GecoApp extends javax.swing.JFrame {
 
 	private void jButtonOpenActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonOpenActionPerformed
 		if (openDatafile()) {
+			reset();
 			initPanelPasswords();
+			pack();
 		}
 	}// GEN-LAST:event_jButtonOpenActionPerformed
+
+	private void reset() {
+		jTabbedPanePasswdCategories.removeAll();
+	}
 
 	private void formWindowClosing(final java.awt.event.WindowEvent evt) {// GEN-FIRST:event_formWindowClosing
 		switch (JOptionPane.showConfirmDialog(this, "Guardar los cambios antes de salir")) {
@@ -279,6 +309,8 @@ public class GecoApp extends javax.swing.JFrame {
 	javax.swing.JButton jButtonNewPasswdCatetory;
 	javax.swing.JButton jButtonOpen;
 	javax.swing.JButton jButtonSave;
+	javax.swing.JLabel jLabelFilename;
+	javax.swing.JPanel jPanel1;
 	javax.swing.JPanel jPanelAbout;
 	javax.swing.JPanel jPanelAccounts;
 	javax.swing.JPanel jPanelCategory;
@@ -300,7 +332,9 @@ public class GecoApp extends javax.swing.JFrame {
 			if (password == null) {
 				return false;
 			} else {
-				return dataFile.open(chooser.getSelectedFile(), password);
+				final File file = chooser.getSelectedFile();
+				jLabelFilename.setText(file.getAbsolutePath());
+				return dataFile.open(file, password);
 			}
 		}
 		return false;
