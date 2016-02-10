@@ -14,6 +14,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import es.kinitrojavatech.geco.data.DataFile;
 import es.kinitrojavatech.geco.gui.JPanelCategory;
 import es.kinitrojavatech.geco.xml.Category;
+import javax.swing.JPasswordField;
 
 /**
  *
@@ -39,8 +40,8 @@ public class GecoApp extends javax.swing.JFrame {
     private void initComponents() {
 
         jToolBar1 = new javax.swing.JToolBar();
-        jButtonOpen = new javax.swing.JButton();
         jButtonSave = new javax.swing.JButton();
+        jButtonNewPasswdCatetory = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanelCategory = new javax.swing.JPanel();
         jTabbedPanePasswdCategories = new javax.swing.JTabbedPane();
@@ -48,25 +49,18 @@ public class GecoApp extends javax.swing.JFrame {
         jPanelEncFs = new javax.swing.JPanel();
         jPanelAbout = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("es/kinitrojavatech/geco/Bundle"); // NOI18N
         setTitle(bundle.getString("GecoApp.title")); // NOI18N
         setName("Form"); // NOI18N
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jToolBar1.setRollover(true);
         jToolBar1.setName("jToolBar1"); // NOI18N
-
-        jButtonOpen.setText(bundle.getString("GecoApp.jButtonOpen.text")); // NOI18N
-        jButtonOpen.setFocusable(false);
-        jButtonOpen.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonOpen.setName("jButtonOpen"); // NOI18N
-        jButtonOpen.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonOpen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonOpenActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButtonOpen);
 
         jButtonSave.setText(bundle.getString("GecoApp.jButtonSave.text")); // NOI18N
         jButtonSave.setFocusable(false);
@@ -79,6 +73,18 @@ public class GecoApp extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButtonSave);
+
+        jButtonNewPasswdCatetory.setText(bundle.getString("GecoApp.jButtonNewPasswdCatetory.text")); // NOI18N
+        jButtonNewPasswdCatetory.setFocusable(false);
+        jButtonNewPasswdCatetory.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonNewPasswdCatetory.setName("jButtonNewPasswdCatetory"); // NOI18N
+        jButtonNewPasswdCatetory.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonNewPasswdCatetory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNewPasswdCatetoryActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButtonNewPasswdCatetory);
 
         getContentPane().add(jToolBar1, java.awt.BorderLayout.PAGE_START);
 
@@ -165,6 +171,26 @@ public class GecoApp extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        switch (JOptionPane.showConfirmDialog(this, "Guardar los cambios antes de salir")) {
+            case
+                JOptionPane.YES_OPTION:
+                dataFile.save();
+                System.exit(0);
+            case JOptionPane.NO_OPTION:
+                System.exit(0);
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+    private void jButtonNewPasswdCatetoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewPasswdCatetoryActionPerformed
+        String name = JOptionPane.showInputDialog(this, "Nombre de la nueva categoría", "Nueva Categoría", JOptionPane.QUESTION_MESSAGE);
+        Category category = new Category();
+        category.setTitle(name);
+        dataFile.getData().getPasswords().getCategory().add(category);
+        JPanelCategory newPanel = new JPanelCategory(category);
+        jTabbedPanePasswdCategories.add(category.getTitle(), newPanel);
+    }//GEN-LAST:event_jButtonNewPasswdCatetoryActionPerformed
+
     private void jButtonOpenActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonOpenActionPerformed
         // TODO add your handling code here:
     }// GEN-LAST:event_jButtonOpenActionPerformed
@@ -174,13 +200,6 @@ public class GecoApp extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Los cambios han sido guardados", "Datos guardados",
                 JOptionPane.INFORMATION_MESSAGE);
     }// GEN-LAST:event_jButtonSaveActionPerformed
-
-    private void exitMenuItemActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_exitMenuItemActionPerformed
-        if (JOptionPane.showConfirmDialog(this, "Guardar los cambios antes de salir") == JOptionPane.YES_OPTION) {
-            dataFile.save();
-        }
-        System.exit(0);
-    }// GEN-LAST:event_exitMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,7 +249,7 @@ public class GecoApp extends javax.swing.JFrame {
     private DataFile dataFile;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    javax.swing.JButton jButtonOpen;
+    javax.swing.JButton jButtonNewPasswdCatetory;
     javax.swing.JButton jButtonSave;
     javax.swing.JPanel jPanelAbout;
     javax.swing.JPanel jPanelAccounts;
