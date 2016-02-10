@@ -5,15 +5,34 @@
  */
 package es.kinitrojavatech.geco.data;
 
-import es.kinitrojavatech.geco.xml.Geco;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.security.InvalidKeyException;
+import java.security.Key;
+import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.SecretKeySpec;
 import javax.swing.JOptionPane;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+
+import es.kinitrojavatech.geco.xml.Geco;
+import es.kinitrojavatech.geco.xml.Passwords;
 
 /**
  *
@@ -21,48 +40,146 @@ import javax.xml.bind.Unmarshaller;
  */
 public class DataFile {
 
-    File file;
-    Geco xml;
-    boolean modified;
+	private static final int PASSWORD_LENGTH = 16;
+	File file;
+	boolean modified;
+	String password;
+	Geco xml;
 
-    public DataFile(File file) {
-        this.file = file;
-    }
-    
-    public void setModified(boolean modified) {
-        this.modified = modified;        
-    }
-    
-    public boolean isModified() {
-        return modified;
-    }
+	/** builda new datafile with empty data */
+	public DataFile() {
+		xml = new Geco();
+		xml.setPasswords(new Passwords());
+	}
 
-    public void save() {
-        try {
-            JAXBContext context = JAXBContext.newInstance("es.kinitrojavatech.geco.xml");
-            Marshaller marshaller = context.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            marshaller.marshal(xml, file);
-        } catch (JAXBException ex) {
-            JOptionPane.showMessageDialog(null, "No se pudo abrir el fichero", ex.getMessage(), JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(DataFile.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-        }
-    }
+	private String checkMinLength(final String passwd, final int length) {
+		if (passwd.length() < length) {
+			return checkMinLength(passwd + passwd, length);
+		} else {
+			return passwd;
+		}
+	}
 
-    public boolean open() {
-        try {
-            JAXBContext context = JAXBContext.newInstance("es.kinitrojavatech.geco.xml");
-            Unmarshaller unmarshaller = context.createUnmarshaller();
-            xml = (Geco) unmarshaller.unmarshal(file);
-        } catch (JAXBException ex) {
-            JOptionPane.showMessageDialog(null, "No se pudo abrir el fichero", ex.getMessage(), JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(DataFile.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-            return false;
-        }
-        return true;
-    }
-    
-    public Geco getData() {
-        return xml;
-    }
+	public byte[] crypt(final byte[] fileContent, final int mode) throws DataFileException {
+		// Generamos una clave de 128 bits adecuada para AES
+		KeyGenerator keyGenerator;
+		try {
+			keyGenerator = KeyGenerator.getInstance("AES");
+			keyGenerator.init(128);
+			final Key key = new SecretKeySpec(password.getBytes(), 0, PASSWORD_LENGTH, "AES");
+
+			// Se obtiene un cifrador AES
+			final Cipher aes = Cipher.getInstance("AES/ECB/PKCS5Padding");
+			// Se inicializa para encriptacion y se encripta el texto,
+			// que debemos pasar como bytes.
+			aes.init(mode, key);
+			return aes.doFinal(fileContent);
+		} catch (final NoSuchAlgorithmException e) {
+			throw new DataFileException(e.getMessage(), e);
+		} catch (final NoSuchPaddingException e) {
+			throw new DataFileException(e.getMessage(), e);
+		} catch (final InvalidKeyException e) {
+			throw new DataFileException(e.getMessage(), e);
+		} catch (final IllegalBlockSizeException e) {
+			throw new DataFileException(e.getMessage(), e);
+		} catch (final BadPaddingException e) {
+			throw new DataFileException(e.getMessage(), e);
+		}
+	}
+
+	public Geco getData() {
+		return xml;
+	}
+
+	public boolean isModified() {
+		return modified;
+	}
+
+	public boolean isOpen() {
+		return (file != null) && (password != null);
+	}
+
+	public boolean open(final File file, final String passwd) {
+		setPassword(passwd);
+		this.file = file;
+		try {
+			final FileInputStream fileInput = new FileInputStream(file);
+			final BufferedInputStream bufferedInput = new BufferedInputStream(fileInput);
+
+			final byte[] array = new byte[1024];
+			int read = bufferedInput.read(array);
+			final ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
+			while (read > 0) {
+				byteArray.write(array, 0, read);
+				read = bufferedInput.read(array);
+			}
+
+			final byte[] decryptedText = crypt(byteArray.toByteArray(), Cipher.DECRYPT_MODE);
+
+			final String result = new String(decryptedText, "UTF-8");
+
+			final StringReader stringReader = new StringReader(result);
+
+			bufferedInput.close();
+			fileInput.close();
+
+			final JAXBContext context = JAXBContext.newInstance("es.kinitrojavatech.geco.xml");
+			final Unmarshaller unmarshaller = context.createUnmarshaller();
+			xml = (Geco) unmarshaller.unmarshal(stringReader);
+		} catch (final JAXBException ex) {
+			JOptionPane.showMessageDialog(null, "No se pudo abrir el fichero", ex.getMessage(),
+					JOptionPane.ERROR_MESSAGE);
+			Logger.getLogger(DataFile.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+			return false;
+		} catch (final DataFileException ex) {
+			JOptionPane.showMessageDialog(null, "No se pudo abrir el fichero", ex.getMessage(),
+					JOptionPane.ERROR_MESSAGE);
+			Logger.getLogger(DataFile.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+			return false;
+		} catch (final IOException ex) {
+			JOptionPane.showMessageDialog(null, "No se pudo abrir el fichero", ex.getMessage(),
+					JOptionPane.ERROR_MESSAGE);
+			Logger.getLogger(DataFile.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+			return false;
+		}
+		return true;
+	}
+
+	public void save() {
+		try {
+			final JAXBContext context = JAXBContext.newInstance("es.kinitrojavatech.geco.xml");
+			final Marshaller marshaller = context.createMarshaller();
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+			final StringWriter stringWriter = new StringWriter();
+			marshaller.marshal(xml, stringWriter);
+			final byte[] cryptedText = crypt(stringWriter.toString().getBytes(), Cipher.ENCRYPT_MODE);
+			final FileOutputStream output = new FileOutputStream(file);
+			output.write(cryptedText);
+			output.close();
+		} catch (final JAXBException ex) {
+			JOptionPane.showMessageDialog(null, "No se pudo guardar el fichero", ex.getMessage(),
+					JOptionPane.ERROR_MESSAGE);
+			Logger.getLogger(DataFile.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+		} catch (final IOException ex) {
+			JOptionPane.showMessageDialog(null, "No se pudo guardar el fichero", ex.getMessage(),
+					JOptionPane.ERROR_MESSAGE);
+			Logger.getLogger(DataFile.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+		} catch (final DataFileException ex) {
+			JOptionPane.showMessageDialog(null, "No se pudo cifrar el fichero", ex.getMessage(),
+					JOptionPane.ERROR_MESSAGE);
+			Logger.getLogger(DataFile.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+		}
+	}
+
+	public void setFile(final File selectedFile) {
+		file = selectedFile;
+	}
+
+	public void setModified(final boolean modified) {
+		this.modified = modified;
+	}
+
+	public void setPassword(final String pwd) {
+		password = checkMinLength(pwd, PASSWORD_LENGTH);
+	}
 }
