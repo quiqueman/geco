@@ -11,6 +11,7 @@ import java.awt.datatransfer.StringSelection;
 
 import javax.swing.JOptionPane;
 
+import es.kinitrojavatech.geco.calc.PasswdCalcDlg;
 import es.kinitrojavatech.geco.xml.Category;
 import es.kinitrojavatech.geco.xml.Site;
 
@@ -18,17 +19,17 @@ import es.kinitrojavatech.geco.xml.Site;
  *
  * @author quique
  */
-public class JPanelPassword extends javax.swing.JPanel {
+public class JPanelSite extends javax.swing.JPanel {
 
 	private static final long serialVersionUID = 4893755101948723944L;
 	private final Site site;
 	private final Category category;
-	private final JPanelPasswords siteContainer;
+	private final JPanelCategory siteContainer;
 
 	/**
 	 * Creates new form jPanelSite
 	 */
-	public JPanelPassword(final JPanelPasswords jPanelPasswords, final Category category, final Site site) {
+	public JPanelSite(final JPanelCategory jPanelPasswords, final Category category, final Site site) {
 		initComponents();
 		siteContainer = jPanelPasswords;
 		this.category = category;
@@ -55,6 +56,7 @@ public class JPanelPassword extends javax.swing.JPanel {
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
+	// <editor-fold defaultstate="collapsed" desc="Generated
 	// Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
@@ -70,21 +72,24 @@ public class JPanelPassword extends javax.swing.JPanel {
 		jLabel2 = new javax.swing.JLabel();
 		jButtonGoto = new javax.swing.JButton();
 		jButtonUpdate = new javax.swing.JButton();
+		jButtonCalc = new javax.swing.JButton();
 
 		setName("Form"); // NOI18N
 
 		final java.util.ResourceBundle bundle = java.util.ResourceBundle
 				.getBundle("es/kinitrojavatech/geco/gui/Bundle"); // NOI18N
-		jLabel1.setText(bundle.getString("JPanelPassword.jLabel1.text")); // NOI18N
+		jLabel1.setText(bundle.getString("JPanelSite.jLabel1.text")); // NOI18N
 		jLabel1.setName("jLabel1"); // NOI18N
 
-		jLabel3.setText(bundle.getString("JPanelPassword.jLabel3.text")); // NOI18N
+		jLabel3.setText(bundle.getString("JPanelSite.jLabel3.text")); // NOI18N
 		jLabel3.setName("jLabel3"); // NOI18N
 
 		jButtonCopyUser.setIcon(
 				new javax.swing.ImageIcon(getClass().getResource("/es/kinitrojavatech/geco/gui/edit-copy.png"))); // NOI18N
+		jButtonCopyUser.setToolTipText(bundle.getString("JPanelSite.jButtonCopyUser.toolTipText")); // NOI18N
 		jButtonCopyUser.setName("jButtonCopyUser"); // NOI18N
 		jButtonCopyUser.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonCopyUserActionPerformed(evt);
 			}
@@ -92,8 +97,10 @@ public class JPanelPassword extends javax.swing.JPanel {
 
 		jButtonCopyPassword.setIcon(
 				new javax.swing.ImageIcon(getClass().getResource("/es/kinitrojavatech/geco/gui/edit-copy.png"))); // NOI18N
+		jButtonCopyPassword.setToolTipText(bundle.getString("JPanelSite.jButtonCopyPassword.toolTipText")); // NOI18N
 		jButtonCopyPassword.setName("jButtonCopyPassword"); // NOI18N
 		jButtonCopyPassword.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonCopyPasswordActionPerformed(evt);
 			}
@@ -112,17 +119,28 @@ public class JPanelPassword extends javax.swing.JPanel {
 
 		jTextFieldUrl.setName("jTextFieldUrl"); // NOI18N
 
-		jLabel2.setText(bundle.getString("JPanelPassword.jLabel2.text")); // NOI18N
+		jLabel2.setText(bundle.getString("JPanelSite.jLabel2.text")); // NOI18N
 		jLabel2.setName("jLabel2"); // NOI18N
 
-		jButtonGoto.setText(bundle.getString("JPanelPassword.jButtonGoto.text")); // NOI18N
+		jButtonGoto.setText(bundle.getString("JPanelSite.jButtonGoto.text")); // NOI18N
 		jButtonGoto.setName("jButtonGoto"); // NOI18N
 
-		jButtonUpdate.setText(bundle.getString("JPanelPassword.jButtonUpdate.text")); // NOI18N
+		jButtonUpdate.setText(bundle.getString("JPanelSite.jButtonUpdate.text")); // NOI18N
 		jButtonUpdate.setName("jButtonUpdate"); // NOI18N
 		jButtonUpdate.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonUpdateActionPerformed(evt);
+			}
+		});
+
+		jButtonCalc.setText(bundle.getString("JPanelSite.jButtonCalc.text")); // NOI18N
+		jButtonCalc.setToolTipText(bundle.getString("JPanelSite.jButtonCalc.toolTipText")); // NOI18N
+		jButtonCalc.setName("jButtonCalc"); // NOI18N
+		jButtonCalc.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
+				jButtonCalcActionPerformed(evt);
 			}
 		});
 
@@ -157,8 +175,15 @@ public class JPanelPassword extends javax.swing.JPanel {
 														Short.MAX_VALUE)
 												.addComponent(jTextFieldUser))
 										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-												.addComponent(jButtonCopyUser).addComponent(jButtonCopyPassword))))
+										.addGroup(layout
+												.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+												.addComponent(jButtonCopyUser, javax.swing.GroupLayout.DEFAULT_SIZE,
+														javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(jButtonCopyPassword, javax.swing.GroupLayout.DEFAULT_SIZE,
+														javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(jButtonCalc, javax.swing.GroupLayout.PREFERRED_SIZE, 58,
+												javax.swing.GroupLayout.PREFERRED_SIZE)))
 								.addGap(0, 0, Short.MAX_VALUE))).addContainerGap())
 				.addGroup(layout.createSequentialGroup().addGap(261, 261, 261).addComponent(jButtonUpdate)
 						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
@@ -173,7 +198,11 @@ public class JPanelPassword extends javax.swing.JPanel {
 				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
 						.addGroup(layout.createSequentialGroup().addComponent(jButtonCopyUser)
 								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(jButtonCopyPassword))
+								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+										.addComponent(jButtonCopyPassword, javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(jButtonCalc, javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
 						.addGroup(layout.createSequentialGroup()
 								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 										.addComponent(jTextFieldUser, javax.swing.GroupLayout.PREFERRED_SIZE,
@@ -191,6 +220,15 @@ public class JPanelPassword extends javax.swing.JPanel {
 						javax.swing.GroupLayout.PREFERRED_SIZE)
 				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jButtonUpdate)));
 	}// </editor-fold>//GEN-END:initComponents
+
+	private void jButtonCalcActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonCalcActionPerformed
+		final PasswdCalcDlg dlg = new PasswdCalcDlg(null, true, jTextFieldUrl.getText());
+		dlg.setVisible(true);
+		final int result = dlg.getReturnStatus();
+		if (result == PasswdCalcDlg.RET_OK) {
+			jPasswordField.setText(dlg.getGeneratedPassword());
+		}
+	}// GEN-LAST:event_jButtonCalcActionPerformed
 
 	private void jButtonUpdateActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonUpdateActionPerformed
 		copyGuiData();
@@ -225,6 +263,7 @@ public class JPanelPassword extends javax.swing.JPanel {
 	}// GEN-LAST:event_jButtonCopyPasswordActionPerformed
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JButton jButtonCalc;
 	private javax.swing.JButton jButtonCopyPassword;
 	private javax.swing.JButton jButtonCopyUser;
 	private javax.swing.JButton jButtonGoto;
