@@ -22,6 +22,8 @@ import es.kinitrojavatech.geco.xml.Category;
  */
 public class GecoApp extends javax.swing.JFrame {
 
+	private static final long serialVersionUID = 1L;
+
 	private String password;
 
 	/**
