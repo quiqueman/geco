@@ -41,7 +41,7 @@ import es.kinitrojavatech.geco.xml.Passwords;
 public class DataFile {
 
 	private static final int PASSWORD_LENGTH = 16;
-	File file;
+	File openfile;
 	boolean modified;
 	String password;
 	Geco xml;
@@ -60,13 +60,13 @@ public class DataFile {
 		}
 	}
 
-	public byte[] crypt(final byte[] fileContent, final int mode) throws DataFileException {
+	public byte[] crypt(final byte[] fileContent, final String passwd, final int mode) throws DataFileException {
 		// Generamos una clave de 128 bits adecuada para AES
 		KeyGenerator keyGenerator;
 		try {
 			keyGenerator = KeyGenerator.getInstance("AES");
 			keyGenerator.init(128);
-			final Key key = new SecretKeySpec(password.getBytes(), 0, PASSWORD_LENGTH, "AES");
+			final Key key = new SecretKeySpec(passwd.getBytes(), 0, PASSWORD_LENGTH, "AES");
 
 			// Se obtiene un cifrador AES
 			final Cipher aes = Cipher.getInstance("AES/ECB/PKCS5Padding");
@@ -83,6 +83,8 @@ public class DataFile {
 		} catch (final IllegalBlockSizeException e) {
 			throw new DataFileException(e.getMessage(), e);
 		} catch (final BadPaddingException e) {
+			throw new DataFileException("Password incorrecto", e);
+		} catch (final IllegalArgumentException e) {
 			throw new DataFileException(e.getMessage(), e);
 		}
 	}
@@ -96,12 +98,11 @@ public class DataFile {
 	}
 
 	public boolean isOpen() {
-		return (file != null) && (password != null);
+		return (openfile != null) && (password != null);
 	}
 
 	public boolean open(final File file, final String passwd) {
-		setPassword(passwd);
-		this.file = file;
+		final String tempPassword = checkMinLength(passwd, PASSWORD_LENGTH);
 		try {
 			final FileInputStream fileInput = new FileInputStream(file);
 			final BufferedInputStream bufferedInput = new BufferedInputStream(fileInput);
@@ -114,7 +115,7 @@ public class DataFile {
 				read = bufferedInput.read(array);
 			}
 
-			final byte[] decryptedText = crypt(byteArray.toByteArray(), Cipher.DECRYPT_MODE);
+			final byte[] decryptedText = crypt(byteArray.toByteArray(), tempPassword, Cipher.DECRYPT_MODE);
 
 			final String result = new String(decryptedText, "UTF-8");
 
@@ -126,18 +127,20 @@ public class DataFile {
 			final JAXBContext context = JAXBContext.newInstance("es.kinitrojavatech.geco.xml");
 			final Unmarshaller unmarshaller = context.createUnmarshaller();
 			xml = (Geco) unmarshaller.unmarshal(stringReader);
+			setPassword(tempPassword);
+			openfile = file;
 		} catch (final JAXBException ex) {
-			JOptionPane.showMessageDialog(null, "No se pudo abrir el fichero", ex.getMessage(),
+			JOptionPane.showMessageDialog(null, ex.getMessage(), "No se pudo abrir el fichero",
 					JOptionPane.ERROR_MESSAGE);
 			Logger.getLogger(DataFile.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
 			return false;
 		} catch (final DataFileException ex) {
-			JOptionPane.showMessageDialog(null, "No se pudo abrir el fichero", ex.getMessage(),
+			JOptionPane.showMessageDialog(null, ex.getMessage(), "No se pudo abrir el fichero",
 					JOptionPane.ERROR_MESSAGE);
 			Logger.getLogger(DataFile.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
 			return false;
 		} catch (final IOException ex) {
-			JOptionPane.showMessageDialog(null, "No se pudo abrir el fichero", ex.getMessage(),
+			JOptionPane.showMessageDialog(null, ex.getMessage(), "No se pudo abrir el fichero",
 					JOptionPane.ERROR_MESSAGE);
 			Logger.getLogger(DataFile.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
 			return false;
@@ -152,10 +155,11 @@ public class DataFile {
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 			final StringWriter stringWriter = new StringWriter();
 			marshaller.marshal(xml, stringWriter);
-			final byte[] cryptedText = crypt(stringWriter.toString().getBytes(), Cipher.ENCRYPT_MODE);
-			final FileOutputStream output = new FileOutputStream(file);
+			final byte[] cryptedText = crypt(stringWriter.toString().getBytes(), password, Cipher.ENCRYPT_MODE);
+			final FileOutputStream output = new FileOutputStream(openfile);
 			output.write(cryptedText);
 			output.close();
+			modified = false;
 		} catch (final JAXBException ex) {
 			JOptionPane.showMessageDialog(null, "No se pudo guardar el fichero", ex.getMessage(),
 					JOptionPane.ERROR_MESSAGE);
@@ -172,7 +176,7 @@ public class DataFile {
 	}
 
 	public void setFile(final File selectedFile) {
-		file = selectedFile;
+		openfile = selectedFile;
 	}
 
 	public void setModified(final boolean modified) {

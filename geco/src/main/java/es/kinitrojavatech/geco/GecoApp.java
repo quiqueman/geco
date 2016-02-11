@@ -201,7 +201,9 @@ public class GecoApp extends javax.swing.JFrame {
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void jButtonOpenActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonOpenActionPerformed
-		if (openDatafile()) {
+		final File file = openDatafile();
+		if (file != null) {
+			jLabelFilename.setText(file.getAbsolutePath());
 			reset();
 			initPanelPasswords();
 			pack();
@@ -322,7 +324,7 @@ public class GecoApp extends javax.swing.JFrame {
 	javax.swing.JToolBar jToolBar1;
 	// End of variables declaration//GEN-END:variables
 
-	private boolean openDatafile() {
+	private File openDatafile() {
 		final JFileChooser chooser = new JFileChooser();
 		final FileNameExtensionFilter filter = new FileNameExtensionFilter("Ficheros de datos de geco", "geco");
 		chooser.setFileFilter(filter);
@@ -331,15 +333,14 @@ public class GecoApp extends javax.swing.JFrame {
 			dataFile = new DataFile();
 			password = JOptionPane.showInputDialog(this, "Introduce el password", "Password",
 					JOptionPane.QUESTION_MESSAGE);
-			if (password == null) {
-				return false;
-			} else {
+			if (password != null) {
 				final File file = chooser.getSelectedFile();
-				jLabelFilename.setText(file.getAbsolutePath());
-				return dataFile.open(file, password);
+				if (dataFile.open(file, password)) {
+					return file;
+				}
 			}
 		}
-		return false;
+		return null;
 	}
 
 	private void initPanelPasswords() {
