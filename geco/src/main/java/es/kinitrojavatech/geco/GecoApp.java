@@ -42,6 +42,7 @@ public class GecoApp extends javax.swing.JFrame {
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
+	// <editor-fold defaultstate="collapsed" desc="Generated
 	// Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
@@ -114,6 +115,12 @@ public class GecoApp extends javax.swing.JFrame {
 		getContentPane().add(jToolBar1, java.awt.BorderLayout.PAGE_START);
 
 		jTabbedPane1.setName("jTabbedPane1"); // NOI18N
+		jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
+				jTabbedPane1StateChanged(evt);
+			}
+		});
 
 		jPanelCategory.setName("jPanelCategory"); // NOI18N
 
@@ -199,6 +206,17 @@ public class GecoApp extends javax.swing.JFrame {
 		pack();
 		setLocationRelativeTo(null);
 	}// </editor-fold>//GEN-END:initComponents
+
+	private void jTabbedPane1StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jTabbedPane1StateChanged
+		switch (jTabbedPane1.getSelectedIndex()) {
+		case 0:
+			jButtonNewPasswdCatetory.setVisible(true);
+			break;
+		default:
+			jButtonNewPasswdCatetory.setVisible(false);
+			break;
+		}
+	}// GEN-LAST:event_jTabbedPane1StateChanged
 
 	private void jButtonOpenActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonOpenActionPerformed
 		final File file = openDatafile();
