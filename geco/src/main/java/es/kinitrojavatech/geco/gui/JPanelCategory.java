@@ -44,27 +44,19 @@ public class JPanelCategory extends javax.swing.JPanel {
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
-	// Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-		jTabbedPane1 = new javax.swing.JTabbedPane();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
 
-		jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+        setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-		final javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-		setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup().addGap(130, 130, 130)
-						.addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-						.addGap(170, 170, 170)));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup().addGap(98, 98, 98)
-						.addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-						.addGap(102, 102, 102)));
-	}// </editor-fold>//GEN-END:initComponents
+        jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+        add(jTabbedPane1);
+    }// </editor-fold>//GEN-END:initComponents
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JTabbedPane jTabbedPane1;
-	// End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane jTabbedPane1;
+    // End of variables declaration//GEN-END:variables
 
 }
