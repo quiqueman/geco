@@ -42,6 +42,7 @@ public class JPanelSite extends javax.swing.JPanel {
 		jTextFieldUser.setText(site.getUsername());
 		jPasswordField.setText(site.getPassword());
 		jTextAreaOptionalInfo.setText(site.getDetails());
+		jTextAreaConfirmation.setText(site.getConfirmation());
 	}
 
 	private boolean isNewSite() {
@@ -61,6 +62,8 @@ public class JPanelSite extends javax.swing.JPanel {
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
+	// <editor-fold defaultstate="collapsed" desc="Generated
+	// <editor-fold defaultstate="collapsed" desc="Generated
 	// Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
@@ -75,6 +78,8 @@ public class JPanelSite extends javax.swing.JPanel {
 		jButtonCopyPassword = new javax.swing.JButton();
 		jButtonCalc = new javax.swing.JButton();
 		jCheckBoxShowPasswd = new javax.swing.JCheckBox();
+		jScrollPane2 = new javax.swing.JScrollPane();
+		jTextAreaConfirmation = new javax.swing.JTextArea();
 		jScrollPane1 = new javax.swing.JScrollPane();
 		jTextAreaOptionalInfo = new javax.swing.JTextArea();
 		jButtonUpdate = new javax.swing.JButton();
@@ -164,10 +169,26 @@ public class JPanelSite extends javax.swing.JPanel {
 			}
 		});
 
+		jScrollPane2.setBorder(
+				javax.swing.BorderFactory.createTitledBorder(bundle.getString("JPanelSite.jScrollPane2.border.title"))); // NOI18N
+		jScrollPane2.setName("jScrollPane2"); // NOI18N
+
+		jTextAreaConfirmation.setColumns(20);
+		jTextAreaConfirmation.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+		jTextAreaConfirmation.setRows(4);
+		jTextAreaConfirmation.setTabSize(4);
+		jTextAreaConfirmation.setName("jTextAreaConfirmation"); // NOI18N
+		jScrollPane2.setViewportView(jTextAreaConfirmation);
+
+		jScrollPane1.setBorder(
+				javax.swing.BorderFactory.createTitledBorder(bundle.getString("JPanelSite.jScrollPane1.border.title"))); // NOI18N
 		jScrollPane1.setName("jScrollPane1"); // NOI18N
 
 		jTextAreaOptionalInfo.setColumns(20);
+		jTextAreaOptionalInfo.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
 		jTextAreaOptionalInfo.setRows(5);
+		jTextAreaOptionalInfo.setTabSize(4);
+		jTextAreaOptionalInfo.setBorder(null);
 		jTextAreaOptionalInfo.setName("jTextAreaOptionalInfo"); // NOI18N
 		jScrollPane1.setViewportView(jTextAreaOptionalInfo);
 
@@ -189,13 +210,25 @@ public class JPanelSite extends javax.swing.JPanel {
 		final javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		setLayout(layout);
 		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+						layout.createSequentialGroup()
+								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+										.addGroup(javax.swing.GroupLayout.Alignment.LEADING,
+												layout.createSequentialGroup().addComponent(jLabel4)
+														.addPreferredGap(
+																javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+												.addComponent(jTextFieldName))
+										.addGroup(layout.createSequentialGroup().addComponent(jLabel2)
+												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+												.addComponent(jTextFieldUrl)))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jButtonGoto,
+								javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+								javax.swing.GroupLayout.PREFERRED_SIZE))
 				.addGroup(layout.createSequentialGroup()
 						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 613,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addGroup(layout.createSequentialGroup()
-								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-										.addComponent(jLabel3).addComponent(jLabel1))
+								.addGroup(layout.createSequentialGroup()
+										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+												.addComponent(jLabel3).addComponent(jLabel1))
 								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
 										.addComponent(jPasswordField).addComponent(jTextFieldUser,
@@ -213,23 +246,12 @@ public class JPanelSite extends javax.swing.JPanel {
 												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 												.addComponent(jButtonCalc, javax.swing.GroupLayout.PREFERRED_SIZE, 36,
 														javax.swing.GroupLayout.PREFERRED_SIZE))))
-						.addComponent(jCheckBoxShowPasswd)
-						.addGroup(layout.createSequentialGroup().addGap(265, 265, 265).addComponent(jButtonUpdate)))
-				.addContainerGap(24, Short.MAX_VALUE))
+						.addComponent(jCheckBoxShowPasswd))
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-						layout.createSequentialGroup()
-								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-										.addGroup(javax.swing.GroupLayout.Alignment.LEADING,
-												layout.createSequentialGroup().addComponent(jLabel4)
-														.addPreferredGap(
-																javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-														.addComponent(jTextFieldName))
-										.addGroup(layout.createSequentialGroup().addComponent(jLabel2)
-												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-												.addComponent(jTextFieldUrl)))
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jButtonGoto,
-								javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-								javax.swing.GroupLayout.PREFERRED_SIZE)));
+						layout.createSequentialGroup().addGap(0, 317, Short.MAX_VALUE).addComponent(jButtonUpdate)
+								.addGap(314, 314, 314))
+				.addComponent(jScrollPane1).addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING));
 		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout
 				.createSequentialGroup()
 				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(jLabel4)
@@ -263,11 +285,12 @@ public class JPanelSite extends javax.swing.JPanel {
 						.addComponent(jButtonCalc, javax.swing.GroupLayout.PREFERRED_SIZE, 34,
 								javax.swing.GroupLayout.PREFERRED_SIZE))
 				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(jCheckBoxShowPasswd)
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(jScrollPane2)
 				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 				.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 131,
 						javax.swing.GroupLayout.PREFERRED_SIZE)
 				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jButtonUpdate)
-				.addContainerGap(18, Short.MAX_VALUE)));
+				.addContainerGap()));
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void jButtonGotoActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonGotoActionPerformed
@@ -307,11 +330,14 @@ public class JPanelSite extends javax.swing.JPanel {
 				siteContainer.addSite(category, site);
 				reset();
 			}
+		} else {
+			site.setName(jTextFieldName.getText());
 		}
 	}// GEN-LAST:event_jButtonUpdateActionPerformed
 
 	private void reset() {
 		jTextAreaOptionalInfo.setText("");
+		jTextAreaConfirmation.setText("");
 		jPasswordField.setText("");
 		jTextFieldUrl.setText("");
 		jTextFieldUser.setText("");
@@ -320,11 +346,11 @@ public class JPanelSite extends javax.swing.JPanel {
 	}
 
 	private void copyGuiData() {
-		site.setName(jTextFieldName.getText());
 		site.setUrl(jTextFieldUrl.getText());
 		site.setUsername(jTextFieldUser.getText());
 		site.setPassword(String.valueOf(jPasswordField.getPassword()));
 		site.setDetails(jTextAreaOptionalInfo.getText());
+		site.setConfirmation(jTextAreaConfirmation.getText());
 	}
 
 	private void jButtonCopyUserActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonCopyUserActionPerformed
@@ -352,6 +378,8 @@ public class JPanelSite extends javax.swing.JPanel {
 	private javax.swing.JLabel jLabel4;
 	private javax.swing.JPasswordField jPasswordField;
 	private javax.swing.JScrollPane jScrollPane1;
+	private javax.swing.JScrollPane jScrollPane2;
+	private javax.swing.JTextArea jTextAreaConfirmation;
 	private javax.swing.JTextArea jTextAreaOptionalInfo;
 	private javax.swing.JTextField jTextFieldName;
 	private javax.swing.JTextField jTextFieldUrl;

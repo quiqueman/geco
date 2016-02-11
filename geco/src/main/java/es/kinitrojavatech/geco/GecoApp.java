@@ -284,6 +284,7 @@ public class GecoApp extends javax.swing.JFrame {
 			dataFile.getData().getPasswords().getCategory().add(category);
 			final JPanelCategory newPanel = new JPanelCategory(category);
 			jTabbedPanePasswdCategories.add(category.getTitle(), newPanel);
+			jTabbedPanePasswdCategories.setSelectedComponent(newPanel);
 			pack();
 		}
 	}// GEN-LAST:event_jButtonNewPasswdCategoryActionPerformed
