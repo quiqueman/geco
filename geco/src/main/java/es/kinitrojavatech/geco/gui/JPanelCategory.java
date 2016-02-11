@@ -16,16 +16,22 @@ public class JPanelCategory extends javax.swing.JPanel {
 
 	private static final long serialVersionUID = 1L;
 
+        private Category category;
 	/**
 	 * Creates new form JPanelSites
 	 */
-	public JPanelCategory(final Category category) {
+	public JPanelCategory(final Category category) {            
 		initComponents();
+                this.category = category;
 		addEmptySite(category);
 		for (final Site site : category.getSite()) {
 			addSite(category, site);
 		}
 	}
+        
+        public Category getCategory() {
+            return category;
+        }
 
 	public void addSite(final Category category, final Site site) {
 		final JPanelSite panelPassword = new JPanelSite(this, category, site);
@@ -46,19 +52,19 @@ public class JPanelCategory extends javax.swing.JPanel {
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
-	// Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-		jTabbedPane1 = new javax.swing.JTabbedPane();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
 
-		setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-		jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
-		add(jTabbedPane1);
-	}// </editor-fold>//GEN-END:initComponents
+        jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+        add(jTabbedPane1);
+    }// </editor-fold>//GEN-END:initComponents
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JTabbedPane jTabbedPane1;
-	// End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane jTabbedPane1;
+    // End of variables declaration//GEN-END:variables
 
 }

@@ -46,13 +46,15 @@ public class GecoApp extends javax.swing.JFrame {
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
+	// <editor-fold defaultstate="collapsed" desc="Generated
 	// Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
 		jToolBar1 = new javax.swing.JToolBar();
 		jButtonOpen = new javax.swing.JButton();
 		jButtonSave = new javax.swing.JButton();
-		jButtonNewPasswdCatetory = new javax.swing.JButton();
+		jButtonNewPasswdCategory = new javax.swing.JButton();
+		jButtonRenamePasswdCategory = new javax.swing.JButton();
 		jTabbedPane1 = new javax.swing.JTabbedPane();
 		jPanelCategory = new javax.swing.JPanel();
 		jTabbedPanePasswdCategories = new javax.swing.JTabbedPane();
@@ -109,20 +111,35 @@ public class GecoApp extends javax.swing.JFrame {
 		});
 		jToolBar1.add(jButtonSave);
 
-		jButtonNewPasswdCatetory.setIcon(
+		jButtonNewPasswdCategory.setIcon(
 				new javax.swing.ImageIcon(getClass().getResource("/es/kinitrojavatech/geco/gui/icons/folder-new.png"))); // NOI18N
-		jButtonNewPasswdCatetory.setText(bundle.getString("GecoApp.jButtonNewPasswdCatetory.text")); // NOI18N
-		jButtonNewPasswdCatetory.setFocusable(false);
-		jButtonNewPasswdCatetory.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-		jButtonNewPasswdCatetory.setName("jButtonNewPasswdCatetory"); // NOI18N
-		jButtonNewPasswdCatetory.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-		jButtonNewPasswdCatetory.addActionListener(new java.awt.event.ActionListener() {
+		jButtonNewPasswdCategory.setText(bundle.getString("GecoApp.jButtonNewPasswdCategory.text")); // NOI18N
+		jButtonNewPasswdCategory.setFocusable(false);
+		jButtonNewPasswdCategory.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+		jButtonNewPasswdCategory.setName("jButtonNewPasswdCategory"); // NOI18N
+		jButtonNewPasswdCategory.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+		jButtonNewPasswdCategory.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
-				jButtonNewPasswdCatetoryActionPerformed(evt);
+				jButtonNewPasswdCategoryActionPerformed(evt);
 			}
 		});
-		jToolBar1.add(jButtonNewPasswdCatetory);
+		jToolBar1.add(jButtonNewPasswdCategory);
+
+		jButtonRenamePasswdCategory.setIcon(new javax.swing.ImageIcon(
+				getClass().getResource("/es/kinitrojavatech/geco/gui/icons/folder-move.png"))); // NOI18N
+		jButtonRenamePasswdCategory.setText(bundle.getString("GecoApp.jButtonRenamePasswdCategory.text")); // NOI18N
+		jButtonRenamePasswdCategory.setFocusable(false);
+		jButtonRenamePasswdCategory.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+		jButtonRenamePasswdCategory.setName("jButtonRenamePasswdCategory"); // NOI18N
+		jButtonRenamePasswdCategory.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+		jButtonRenamePasswdCategory.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
+				jButtonRenamePasswdCategoryActionPerformed(evt);
+			}
+		});
+		jToolBar1.add(jButtonRenamePasswdCategory);
 
 		getContentPane().add(jToolBar1, java.awt.BorderLayout.PAGE_START);
 
@@ -207,13 +224,29 @@ public class GecoApp extends javax.swing.JFrame {
 		setLocationRelativeTo(null);
 	}// </editor-fold>//GEN-END:initComponents
 
+	private void jButtonRenamePasswdCategoryActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonRenamePasswdCategoryActionPerformed
+		final JPanelCategory panel = (JPanelCategory) jTabbedPanePasswdCategories.getSelectedComponent();
+		if (panel != null) {
+			final String oldName = panel.getCategory().getTitle();
+			final String newName = JOptionPane.showInputDialog(this,
+					"¿Qué nombre quieres para la categoría '" + oldName + "'", "Renombrar categoría",
+					JOptionPane.QUESTION_MESSAGE);
+			if (newName != null) {
+				panel.getCategory().setTitle(newName);
+			}
+			jTabbedPanePasswdCategories.setTitleAt(jTabbedPanePasswdCategories.getSelectedIndex(), newName);
+		}
+	}// GEN-LAST:event_jButtonRenamePasswdCategoryActionPerformed
+
 	private void jTabbedPane1StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jTabbedPane1StateChanged
 		switch (jTabbedPane1.getSelectedIndex()) {
 		case 0:
-			jButtonNewPasswdCatetory.setVisible(true);
+			jButtonNewPasswdCategory.setVisible(true);
+			jButtonRenamePasswdCategory.setVisible(true);
 			break;
 		default:
-			jButtonNewPasswdCatetory.setVisible(false);
+			jButtonNewPasswdCategory.setVisible(false);
+			jButtonRenamePasswdCategory.setVisible(false);
 			break;
 		}
 	}// GEN-LAST:event_jTabbedPane1StateChanged
@@ -242,7 +275,7 @@ public class GecoApp extends javax.swing.JFrame {
 		}
 	}// GEN-LAST:event_formWindowClosing
 
-	private void jButtonNewPasswdCatetoryActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonNewPasswdCatetoryActionPerformed
+	private void jButtonNewPasswdCategoryActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonNewPasswdCategoryActionPerformed
 		final String name = JOptionPane.showInputDialog(this, "Nombre de la nueva categoría", "Nueva Categoría",
 				JOptionPane.QUESTION_MESSAGE);
 		if (name != null) {
@@ -253,7 +286,7 @@ public class GecoApp extends javax.swing.JFrame {
 			jTabbedPanePasswdCategories.add(category.getTitle(), newPanel);
 			pack();
 		}
-	}// GEN-LAST:event_jButtonNewPasswdCatetoryActionPerformed
+	}// GEN-LAST:event_jButtonNewPasswdCategoryActionPerformed
 
 	private void jButtonSaveActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonSaveActionPerformed
 		save();
@@ -328,8 +361,9 @@ public class GecoApp extends javax.swing.JFrame {
 	private DataFile dataFile;
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
-	javax.swing.JButton jButtonNewPasswdCatetory;
+	javax.swing.JButton jButtonNewPasswdCategory;
 	javax.swing.JButton jButtonOpen;
+	javax.swing.JButton jButtonRenamePasswdCategory;
 	javax.swing.JButton jButtonSave;
 	javax.swing.JLabel jLabelFilename;
 	javax.swing.JPanel jPanel1;
