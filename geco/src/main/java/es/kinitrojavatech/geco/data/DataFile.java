@@ -13,6 +13,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -40,6 +41,7 @@ import es.kinitrojavatech.geco.xml.Passwords;
  */
 public class DataFile {
 
+	private static final String CHARSET = "ISO-8859-15";
 	private static final int PASSWORD_LENGTH = 16;
 	File openfile;
 	boolean modified;
@@ -66,7 +68,7 @@ public class DataFile {
 		try {
 			keyGenerator = KeyGenerator.getInstance("AES");
 			keyGenerator.init(128);
-			final Key key = new SecretKeySpec(passwd.getBytes(), 0, PASSWORD_LENGTH, "AES");
+			final Key key = new SecretKeySpec(passwd.getBytes(CHARSET), 0, PASSWORD_LENGTH, "AES");
 
 			// Se obtiene un cifrador AES
 			final Cipher aes = Cipher.getInstance("AES/ECB/PKCS5Padding");
@@ -85,6 +87,8 @@ public class DataFile {
 		} catch (final BadPaddingException e) {
 			throw new DataFileException("Password incorrecto", e);
 		} catch (final IllegalArgumentException e) {
+			throw new DataFileException(e.getMessage(), e);
+		} catch (final UnsupportedEncodingException e) {
 			throw new DataFileException(e.getMessage(), e);
 		}
 	}
@@ -117,7 +121,7 @@ public class DataFile {
 
 			final byte[] decryptedText = crypt(byteArray.toByteArray(), tempPassword, Cipher.DECRYPT_MODE);
 
-			final String result = new String(decryptedText, "UTF-8");
+			final String result = new String(decryptedText, CHARSET);
 
 			final StringReader stringReader = new StringReader(result);
 
@@ -155,7 +159,7 @@ public class DataFile {
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 			final StringWriter stringWriter = new StringWriter();
 			marshaller.marshal(xml, stringWriter);
-			final byte[] cryptedText = crypt(stringWriter.toString().getBytes(), password, Cipher.ENCRYPT_MODE);
+			final byte[] cryptedText = crypt(stringWriter.toString().getBytes(CHARSET), password, Cipher.ENCRYPT_MODE);
 			final FileOutputStream output = new FileOutputStream(openfile);
 			output.write(cryptedText);
 			output.close();
