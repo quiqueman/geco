@@ -27,20 +27,11 @@ public class JPanelEncFsCollection extends javax.swing.JPanel {
 
 	private EncryptedVolumes volumes = null;
 
-        /**
+	/**
 	 * Creates new form JPanelEncFs
 	 */
 	public JPanelEncFsCollection() {
 		initComponents();
-		initVolumesPanels();
-	}
-        
-	/**
-	 * Creates new form JPanelEncFs
-	 */
-	public JPanelEncFsCollection(final EncryptedVolumes volumes) {
-		initComponents();
-		this.volumes = volumes;
 		initVolumesPanels();
 	}
 
@@ -63,6 +54,12 @@ public class JPanelEncFsCollection extends javax.swing.JPanel {
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JTabbedPane jTabbedPane1;
 	// End of variables declaration//GEN-END:variables
+
+	public void init(final EncryptedVolumes volumes) {
+		this.volumes = volumes;
+		jTabbedPane1.removeAll();
+		initVolumesPanels();
+	}
 
 	private void initVolumesPanels() {
 		JPanelEncFsVolume jPanel = new JPanelEncFsVolume(new Volume());

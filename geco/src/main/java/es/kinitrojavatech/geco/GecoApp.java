@@ -18,7 +18,6 @@ import es.kinitrojavatech.geco.calc.PasswdCalcDlg;
 import es.kinitrojavatech.geco.data.DataFile;
 import es.kinitrojavatech.geco.data.DataFileException;
 import es.kinitrojavatech.geco.gui.JPanelCategory;
-import es.kinitrojavatech.geco.gui.JPanelEncFsCollection;
 import es.kinitrojavatech.geco.xml.Category;
 import es.kinitrojavatech.geco.xml.EncryptedVolumes;
 
@@ -449,6 +448,6 @@ public class GecoApp extends javax.swing.JFrame {
 			encVolumes = new EncryptedVolumes();
 			dataFile.getData().setEncryptedVolumes(encVolumes);
 		}
-		jPanelEncFsCollection = new JPanelEncFsCollection(encVolumes);
+		jPanelEncFsCollection.init(encVolumes);
 	}
 }
