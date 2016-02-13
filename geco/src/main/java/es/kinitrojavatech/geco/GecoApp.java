@@ -5,18 +5,22 @@
  */
 package es.kinitrojavatech.geco;
 
-import es.kinitrojavatech.geco.calc.PasswdCalcDlg;
 import java.awt.Toolkit;
 import java.io.File;
 import java.util.List;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import es.kinitrojavatech.geco.calc.PasswdCalcDlg;
 import es.kinitrojavatech.geco.data.DataFile;
+import es.kinitrojavatech.geco.data.DataFileException;
 import es.kinitrojavatech.geco.gui.JPanelCategory;
+import es.kinitrojavatech.geco.gui.JPanelEncFsCollection;
 import es.kinitrojavatech.geco.xml.Category;
+import es.kinitrojavatech.geco.xml.EncryptedVolumes;
 
 /**
  *
@@ -49,6 +53,8 @@ public class GecoApp extends javax.swing.JFrame {
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
+	// <editor-fold defaultstate="collapsed" desc="Generated
+	// <editor-fold defaultstate="collapsed" desc="Generated
 	// Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
@@ -62,19 +68,20 @@ public class GecoApp extends javax.swing.JFrame {
 		jPanelCategory = new javax.swing.JPanel();
 		jTabbedPanePasswdCategories = new javax.swing.JTabbedPane();
 		jPanelAccounts = new javax.swing.JPanel();
-		jPanelEncFs = new javax.swing.JPanel();
+		jPanelEncFsCollection = new es.kinitrojavatech.geco.gui.JPanelEncFsCollection();
 		jPanelAbout = new es.kinitrojavatech.geco.gui.JPanelAbout();
 		jPanel1 = new javax.swing.JPanel();
 		jLabelFilename = new javax.swing.JLabel();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-		java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("es/kinitrojavatech/geco/Bundle"); // NOI18N
+		final java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("es/kinitrojavatech/geco/Bundle"); // NOI18N
 		setTitle(bundle.getString("GecoApp.title")); // NOI18N
 		setIconImage(Toolkit.getDefaultToolkit()
 				.getImage(getClass().getResource("/es/kinitrojavatech/geco/gui/icons/logo.png")));
 		setName("Form"); // NOI18N
 		addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent evt) {
+			@Override
+			public void windowClosing(final java.awt.event.WindowEvent evt) {
 				formWindowClosing(evt);
 			}
 		});
@@ -91,7 +98,8 @@ public class GecoApp extends javax.swing.JFrame {
 		jButtonOpen.setName("jButtonOpen"); // NOI18N
 		jButtonOpen.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 		jButtonOpen.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonOpenActionPerformed(evt);
 			}
 		});
@@ -105,7 +113,8 @@ public class GecoApp extends javax.swing.JFrame {
 		jButtonSave.setName("jButtonSave"); // NOI18N
 		jButtonSave.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 		jButtonSave.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonSaveActionPerformed(evt);
 			}
 		});
@@ -119,7 +128,8 @@ public class GecoApp extends javax.swing.JFrame {
 		jButtonNewPasswdCategory.setName("jButtonNewPasswdCategory"); // NOI18N
 		jButtonNewPasswdCategory.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 		jButtonNewPasswdCategory.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonNewPasswdCategoryActionPerformed(evt);
 			}
 		});
@@ -133,7 +143,8 @@ public class GecoApp extends javax.swing.JFrame {
 		jButtonRenamePasswdCategory.setName("jButtonRenamePasswdCategory"); // NOI18N
 		jButtonRenamePasswdCategory.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 		jButtonRenamePasswdCategory.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonRenamePasswdCategoryActionPerformed(evt);
 			}
 		});
@@ -147,7 +158,8 @@ public class GecoApp extends javax.swing.JFrame {
 		jButtonPasswdCalc.setName("jButtonPasswdCalc"); // NOI18N
 		jButtonPasswdCalc.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 		jButtonPasswdCalc.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonPasswdCalcActionPerformed(evt);
 			}
 		});
@@ -157,7 +169,8 @@ public class GecoApp extends javax.swing.JFrame {
 
 		jTabbedPane1.setName("jTabbedPane1"); // NOI18N
 		jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jTabbedPane1StateChanged(evt);
 			}
 		});
@@ -169,7 +182,7 @@ public class GecoApp extends javax.swing.JFrame {
 		jTabbedPanePasswdCategories.setName("jTabbedPanePasswdCategories"); // NOI18N
 		jTabbedPanePasswdCategories.setPreferredSize(null);
 
-		javax.swing.GroupLayout jPanelCategoryLayout = new javax.swing.GroupLayout(jPanelCategory);
+		final javax.swing.GroupLayout jPanelCategoryLayout = new javax.swing.GroupLayout(jPanelCategory);
 		jPanelCategory.setLayout(jPanelCategoryLayout);
 		jPanelCategoryLayout.setHorizontalGroup(jPanelCategoryLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 795, Short.MAX_VALUE)
@@ -179,39 +192,43 @@ public class GecoApp extends javax.swing.JFrame {
 										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addGap(0, 0, Short.MAX_VALUE))));
 		jPanelCategoryLayout.setVerticalGroup(jPanelCategoryLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 388, Short.MAX_VALUE)
+				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 404, Short.MAX_VALUE)
 				.addGroup(jPanelCategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 						.addGroup(jPanelCategoryLayout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE)
 								.addComponent(jTabbedPanePasswdCategories, javax.swing.GroupLayout.PREFERRED_SIZE,
 										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addGap(0, 0, Short.MAX_VALUE))));
 
-		jTabbedPane1.addTab(bundle.getString("GecoApp.jPanelCategory.TabConstraints.tabTitle"), jPanelCategory); // NOI18N
+		jTabbedPane1.addTab(bundle.getString("GecoApp.jPanelCategory.TabConstraints.tabTitle"),
+				new javax.swing.ImageIcon(
+						getClass().getResource("/es/kinitrojavatech/geco/gui/icons/stock_keyring.png")),
+				jPanelCategory); // NOI18N
 
 		jPanelAccounts.setName("jPanelAccounts"); // NOI18N
 
-		javax.swing.GroupLayout jPanelAccountsLayout = new javax.swing.GroupLayout(jPanelAccounts);
+		final javax.swing.GroupLayout jPanelAccountsLayout = new javax.swing.GroupLayout(jPanelAccounts);
 		jPanelAccounts.setLayout(jPanelAccountsLayout);
 		jPanelAccountsLayout.setHorizontalGroup(jPanelAccountsLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 795, Short.MAX_VALUE));
 		jPanelAccountsLayout.setVerticalGroup(jPanelAccountsLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 388, Short.MAX_VALUE));
+				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 404, Short.MAX_VALUE));
 
-		jTabbedPane1.addTab(bundle.getString("GecoApp.jPanelAccounts.TabConstraints.tabTitle"), jPanelAccounts); // NOI18N
+		jTabbedPane1
+				.addTab(bundle.getString("GecoApp.jPanelAccounts.TabConstraints.tabTitle"),
+						new javax.swing.ImageIcon(
+								getClass().getResource("/es/kinitrojavatech/geco/gui/icons/gnucash-icon.png")),
+				jPanelAccounts); // NOI18N
 
-		jPanelEncFs.setName("jPanelEncFs"); // NOI18N
-
-		javax.swing.GroupLayout jPanelEncFsLayout = new javax.swing.GroupLayout(jPanelEncFs);
-		jPanelEncFs.setLayout(jPanelEncFsLayout);
-		jPanelEncFsLayout.setHorizontalGroup(jPanelEncFsLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 795, Short.MAX_VALUE));
-		jPanelEncFsLayout.setVerticalGroup(jPanelEncFsLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 388, Short.MAX_VALUE));
-
-		jTabbedPane1.addTab(bundle.getString("GecoApp.jPanelEncFs.TabConstraints.tabTitle"), jPanelEncFs); // NOI18N
+		jPanelEncFsCollection.setName("jPanelEncFsCollection"); // NOI18N
+		jTabbedPane1.addTab(bundle.getString("GecoApp.jPanelEncFsCollection.TabConstraints.tabTitle"),
+				new javax.swing.ImageIcon(getClass().getResource("/es/kinitrojavatech/geco/gui/icons/encrypted.png")),
+				jPanelEncFsCollection); // NOI18N
 
 		jPanelAbout.setName("jPanelAbout"); // NOI18N
-		jTabbedPane1.addTab(bundle.getString("GecoApp.jPanelAbout.TabConstraints.tabTitle"), jPanelAbout); // NOI18N
+		jTabbedPane1.addTab(bundle.getString("GecoApp.jPanelAbout.TabConstraints.tabTitle"),
+				new javax.swing.ImageIcon(
+						getClass().getResource("/es/kinitrojavatech/geco/gui/icons/gnome-about-logo.png")),
+				jPanelAbout); // NOI18N
 
 		getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
 
@@ -227,8 +244,8 @@ public class GecoApp extends javax.swing.JFrame {
 		setLocationRelativeTo(null);
 	}// </editor-fold>//GEN-END:initComponents
 
-	private void jButtonPasswdCalcActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonPasswdCalcActionPerformed
-		PasswdCalcDlg dlg = new PasswdCalcDlg(this, true, "");
+	private void jButtonPasswdCalcActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonPasswdCalcActionPerformed
+		final PasswdCalcDlg dlg = new PasswdCalcDlg(this, true, "");
 		dlg.setVisible(true);
 	}// GEN-LAST:event_jButtonPasswdCalcActionPerformed
 
@@ -306,6 +323,8 @@ public class GecoApp extends javax.swing.JFrame {
 	private void save() {
 		if (dataFile.isOpen()) {
 			dataFile.save();
+			JOptionPane.showMessageDialog(this, "Los cambios han sido guardados", "Datos guardados",
+					JOptionPane.INFORMATION_MESSAGE);
 		} else {
 			final JFileChooser chooser = new JFileChooser();
 			final FileNameExtensionFilter filter = new FileNameExtensionFilter("Ficheros de datos de geco", "geco");
@@ -315,14 +334,19 @@ public class GecoApp extends javax.swing.JFrame {
 				password = JOptionPane.showInputDialog(this, "Introduce el password", "Password",
 						JOptionPane.QUESTION_MESSAGE);
 				if (password != null) {
-					dataFile.setPassword(password);
-					dataFile.setFile(chooser.getSelectedFile());
-					dataFile.save();
+					try {
+						dataFile.setPassword(password);
+						dataFile.setFile(chooser.getSelectedFile());
+						dataFile.save();
+						JOptionPane.showMessageDialog(this, "Los cambios han sido guardados", "Datos guardados",
+								JOptionPane.INFORMATION_MESSAGE);
+					} catch (final DataFileException e) {
+						JOptionPane.showMessageDialog(this, "El password no puede estar vacío", "Password incorrecto",
+								JOptionPane.ERROR_MESSAGE);
+					}
 				}
 			}
 		}
-		JOptionPane.showMessageDialog(this, "Los cambios han sido guardados", "Datos guardados",
-				JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	/**
@@ -363,6 +387,7 @@ public class GecoApp extends javax.swing.JFrame {
 			public void run() {
 				final GecoApp app = new GecoApp();
 				app.initComponents();
+				app.initPanelEncFs();
 				app.pack();
 				app.setVisible(true);
 			}
@@ -382,7 +407,7 @@ public class GecoApp extends javax.swing.JFrame {
 	es.kinitrojavatech.geco.gui.JPanelAbout jPanelAbout;
 	javax.swing.JPanel jPanelAccounts;
 	javax.swing.JPanel jPanelCategory;
-	javax.swing.JPanel jPanelEncFs;
+	es.kinitrojavatech.geco.gui.JPanelEncFsCollection jPanelEncFsCollection;
 	javax.swing.JTabbedPane jTabbedPane1;
 	javax.swing.JTabbedPane jTabbedPanePasswdCategories;
 	javax.swing.JToolBar jToolBar1;
@@ -395,9 +420,11 @@ public class GecoApp extends javax.swing.JFrame {
 		final int returnVal = chooser.showOpenDialog(this);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			dataFile = new DataFile();
-			password = JOptionPane.showInputDialog(this, "Introduce el password", "Password",
-					JOptionPane.QUESTION_MESSAGE);
-			if (password != null) {
+			final JPasswordField jPasswdField = new JPasswordField(10);
+			final int result = JOptionPane.showConfirmDialog(this, jPasswdField, "Introduce el password",
+					JOptionPane.OK_CANCEL_OPTION);
+			if (result == JOptionPane.OK_OPTION) {
+				password = String.valueOf(jPasswdField.getPassword());
 				final File file = chooser.getSelectedFile();
 				if (dataFile.open(file, password)) {
 					return file;
@@ -414,5 +441,14 @@ public class GecoApp extends javax.swing.JFrame {
 			final JPanelCategory panel = new JPanelCategory(category);
 			jTabbedPanePasswdCategories.add(category.getTitle(), panel);
 		}
+	}
+
+	private void initPanelEncFs() {
+		EncryptedVolumes encVolumes = dataFile.getData().getEncryptedVolumes();
+		if (encVolumes == null) {
+			encVolumes = new EncryptedVolumes();
+			dataFile.getData().setEncryptedVolumes(encVolumes);
+		}
+		jPanelEncFsCollection = new JPanelEncFsCollection(encVolumes);
 	}
 }

@@ -54,7 +54,10 @@ public class DataFile {
 		xml.setPasswords(new Passwords());
 	}
 
-	private String checkMinLength(final String passwd, final int length) {
+	private String checkMinLength(final String passwd, final int length) throws DataFileException {
+		if (passwd.isEmpty()) {
+			throw new DataFileException("El password no puede estar vacio", null);
+		}
 		if (passwd.length() < length) {
 			return checkMinLength(passwd + passwd, length);
 		} else {
@@ -106,8 +109,8 @@ public class DataFile {
 	}
 
 	public boolean open(final File file, final String passwd) {
-		final String tempPassword = checkMinLength(passwd, PASSWORD_LENGTH);
 		try {
+			final String tempPassword = checkMinLength(passwd, PASSWORD_LENGTH);
 			final FileInputStream fileInput = new FileInputStream(file);
 			final BufferedInputStream bufferedInput = new BufferedInputStream(fileInput);
 
@@ -187,7 +190,7 @@ public class DataFile {
 		this.modified = modified;
 	}
 
-	public void setPassword(final String pwd) {
+	public void setPassword(final String pwd) throws DataFileException {
 		password = checkMinLength(pwd, PASSWORD_LENGTH);
 	}
 }

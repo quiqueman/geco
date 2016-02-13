@@ -75,7 +75,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="volumen">
+  <xs:element name="volume">
     <xs:complexType>
       <xs:simpleContent>
         <xs:extension base="xs:string">
@@ -83,6 +83,7 @@
           <xs:attribute type="xs:string" name="path"/>
           <xs:attribute type="xs:string" name="description"/>
           <xs:attribute type="xs:string" name="password"/>
+          <xs:attribute type="xs:string" name="mountPoint"/>
         </xs:extension>
       </xs:simpleContent>
     </xs:complexType>
@@ -105,7 +106,7 @@
   <xs:element name="encryptedVolumes">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="volumen"/>
+        <xs:element ref="volume" maxOccurs="unbounded" minOccurs="0"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
