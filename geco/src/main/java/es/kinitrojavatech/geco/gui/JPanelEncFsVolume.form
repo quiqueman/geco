@@ -58,13 +58,20 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jButtonDelete" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButtonUpdate" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jButtonUpdate" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="jButtonMount" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jButtonUnmount" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="183" max="-2" attributes="0"/>
+              <Component id="jLabelStatus" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -100,10 +107,13 @@
                   <Component id="jButtonBrowseMountPoint" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jLabelStatus" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButtonUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonMount" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonDelete" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonUnmount" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -187,7 +197,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/es/kinitrojavatech/geco/gui/icons/system-file-manager.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Montar FS"/>
+        <Property name="text" type="java.lang.String" value="Montar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonMountActionPerformed"/>
@@ -199,6 +209,22 @@
           <Image iconType="3" name="/es/kinitrojavatech/geco/gui/icons/edit-delete.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Borrar"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonUnmount">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/es/kinitrojavatech/geco/gui/icons/drive-removable-media.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Desmontar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonUnmountActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelStatus">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="El sistema de ficheros esta desmontado"/>
       </Properties>
     </Component>
   </SubComponents>

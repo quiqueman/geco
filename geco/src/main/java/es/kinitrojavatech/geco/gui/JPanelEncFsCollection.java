@@ -16,6 +16,9 @@
  */
 package es.kinitrojavatech.geco.gui;
 
+import java.util.List;
+
+import es.kinitrojavatech.geco.desktop.DesktopIntegration;
 import es.kinitrojavatech.geco.xml.EncryptedVolumes;
 import es.kinitrojavatech.geco.xml.Volume;
 
@@ -42,18 +45,20 @@ public class JPanelEncFsCollection extends javax.swing.JPanel {
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated
-	// Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-		jTabbedPane1 = new javax.swing.JTabbedPane();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
 
-		jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
-		add(jTabbedPane1);
-	}// </editor-fold>//GEN-END:initComponents
+        setLayout(new java.awt.BorderLayout());
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JTabbedPane jTabbedPane1;
-	// End of variables declaration//GEN-END:variables
+        jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+        add(jTabbedPane1, java.awt.BorderLayout.CENTER);
+    }// </editor-fold>//GEN-END:initComponents
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane jTabbedPane1;
+    // End of variables declaration//GEN-END:variables
 
 	public void init(final EncryptedVolumes volumes) {
 		this.volumes = volumes;
@@ -62,18 +67,22 @@ public class JPanelEncFsCollection extends javax.swing.JPanel {
 	}
 
 	private void initVolumesPanels() {
-		JPanelEncFsVolume jPanel = new JPanelEncFsVolume(this, volumes, new Volume());
+		JPanelEncFsVolume jPanel = new JPanelEncFsVolume(this, volumes, new Volume(), false);
 		jTabbedPane1.add("Nuevo FS", jPanel);
 		if (volumes != null) {
+			final List<String> mountedEncFs = DesktopIntegration.getDesktop().mountedEncFs();
 			for (final Volume volume : volumes.getVolume()) {
-				jPanel = new JPanelEncFsVolume(this, volumes, volume);
+				final boolean mounted = mountedEncFs.contains(volume.getMountPoint());
+				jPanel = new JPanelEncFsVolume(this, volumes, volume, mounted);
 				jTabbedPane1.add(volume.getName(), jPanel);
 			}
 		}
 	}
 
 	public void addVolume(final Volume volume) {
-		final JPanelEncFsVolume panelEncFsVolume = new JPanelEncFsVolume(this, volumes, volume);
+		final List<String> mountedEncFs = DesktopIntegration.getDesktop().mountedEncFs();
+		final boolean mounted = mountedEncFs.contains(volume.getMountPoint());
+		final JPanelEncFsVolume panelEncFsVolume = new JPanelEncFsVolume(this, volumes, volume, mounted);
 		jTabbedPane1.add(volume.getName(), panelEncFsVolume);
 		jTabbedPane1.setSelectedIndex(jTabbedPane1.getTabCount() - 1);
 	}

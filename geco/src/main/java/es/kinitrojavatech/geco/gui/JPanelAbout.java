@@ -36,21 +36,20 @@ public class JPanelAbout extends javax.swing.JPanel {
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated
-	// Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-		jLabel1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
-		jLabel1.setIcon(
-				new javax.swing.ImageIcon(getClass().getResource("/es/kinitrojavatech/geco/gui/icons/logo.png"))); // NOI18N
-		jLabel1.setText("Geco - Gestor de contraseñas - 0.1");
-		jLabel1.setMaximumSize(null);
-		jLabel1.setMinimumSize(null);
-		jLabel1.setPreferredSize(null);
-		add(jLabel1);
-	}// </editor-fold>//GEN-END:initComponents
+        setLayout(new java.awt.BorderLayout());
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JLabel jLabel1;
-	// End of variables declaration//GEN-END:variables
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/es/kinitrojavatech/geco/gui/icons/logo.png"))); // NOI18N
+        jLabel1.setText("Geco - Gestor de contraseñas - 0.1");
+        add(jLabel1, java.awt.BorderLayout.CENTER);
+    }// </editor-fold>//GEN-END:initComponents
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    // End of variables declaration//GEN-END:variables
 }
