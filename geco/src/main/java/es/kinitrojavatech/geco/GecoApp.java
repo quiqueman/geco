@@ -414,7 +414,7 @@ public class GecoApp extends javax.swing.JFrame {
 	// End of variables declaration//GEN-END:variables
 
 	private File openDatafile() {
-		final JFileChooser chooser = new JFileChooser();
+		final JFileChooser chooser = new JFileChooser(new File("."));
 		final FileNameExtensionFilter filter = new FileNameExtensionFilter("Ficheros de datos de geco", "geco");
 		chooser.setFileFilter(filter);
 		final int returnVal = chooser.showOpenDialog(this);
