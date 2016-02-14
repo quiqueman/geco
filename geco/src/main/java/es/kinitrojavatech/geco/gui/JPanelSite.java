@@ -9,12 +9,12 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.net.URISyntaxException;
 
 import javax.swing.JOptionPane;
 
 import es.kinitrojavatech.geco.calc.PasswdCalcDlg;
+import es.kinitrojavatech.geco.desktop.DesktopIntegration;
 import es.kinitrojavatech.geco.xml.Category;
 import es.kinitrojavatech.geco.xml.Site;
 
@@ -70,221 +70,249 @@ public class JPanelSite extends javax.swing.JPanel {
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+	// <editor-fold defaultstate="collapsed" desc="Generated
+	// Code">//GEN-BEGIN:initComponents
+	private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jTextFieldUrl = new javax.swing.JTextField();
-        jButtonGoto = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jTextFieldUser = new javax.swing.JTextField();
-        jButtonCopyUser = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jPasswordField = new javax.swing.JPasswordField();
-        jButtonCopyPassword = new javax.swing.JButton();
-        jButtonCalc = new javax.swing.JButton();
-        jCheckBoxShowPasswd = new javax.swing.JCheckBox();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextAreaConfirmation = new javax.swing.JTextArea();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextAreaOptionalInfo = new javax.swing.JTextArea();
-        jButtonUpdate = new javax.swing.JButton();
-        jLabelSiteName = new javax.swing.JLabel();
-        jTextFieldName = new javax.swing.JTextField();
+		jLabel1 = new javax.swing.JLabel();
+		jTextFieldUrl = new javax.swing.JTextField();
+		jButtonGoto = new javax.swing.JButton();
+		jLabel2 = new javax.swing.JLabel();
+		jTextFieldUser = new javax.swing.JTextField();
+		jButtonCopyUser = new javax.swing.JButton();
+		jLabel3 = new javax.swing.JLabel();
+		jPasswordField = new javax.swing.JPasswordField();
+		jButtonCopyPassword = new javax.swing.JButton();
+		jButtonCalc = new javax.swing.JButton();
+		jCheckBoxShowPasswd = new javax.swing.JCheckBox();
+		jScrollPane2 = new javax.swing.JScrollPane();
+		jTextAreaConfirmation = new javax.swing.JTextArea();
+		jScrollPane1 = new javax.swing.JScrollPane();
+		jTextAreaOptionalInfo = new javax.swing.JTextArea();
+		jButtonUpdate = new javax.swing.JButton();
+		jLabelSiteName = new javax.swing.JLabel();
+		jTextFieldName = new javax.swing.JTextField();
 
-        setName("Form"); // NOI18N
+		setName("Form"); // NOI18N
 
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("es/kinitrojavatech/geco/gui/Bundle"); // NOI18N
-        jLabel1.setText(bundle.getString("JPanelSite.jLabel1.text")); // NOI18N
-        jLabel1.setName("jLabel1"); // NOI18N
+		final java.util.ResourceBundle bundle = java.util.ResourceBundle
+				.getBundle("es/kinitrojavatech/geco/gui/Bundle"); // NOI18N
+		jLabel1.setText(bundle.getString("JPanelSite.jLabel1.text")); // NOI18N
+		jLabel1.setName("jLabel1"); // NOI18N
 
-        jTextFieldUrl.setName("jTextFieldUrl"); // NOI18N
+		jTextFieldUrl.setName("jTextFieldUrl"); // NOI18N
 
-        jButtonGoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/es/kinitrojavatech/geco/gui/icons/web-browser.png"))); // NOI18N
-        jButtonGoto.setText(bundle.getString("JPanelSite.jButtonGoto.text")); // NOI18N
-        jButtonGoto.setToolTipText(bundle.getString("JPanelSite.jButtonGoto.toolTipText")); // NOI18N
-        jButtonGoto.setMaximumSize(null);
-        jButtonGoto.setMinimumSize(null);
-        jButtonGoto.setName("jButtonGoto"); // NOI18N
-        jButtonGoto.setPreferredSize(new java.awt.Dimension(36, 36));
-        jButtonGoto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonGotoActionPerformed(evt);
-            }
-        });
+		jButtonGoto.setIcon(new javax.swing.ImageIcon(
+				getClass().getResource("/es/kinitrojavatech/geco/gui/icons/web-browser.png"))); // NOI18N
+		jButtonGoto.setText(bundle.getString("JPanelSite.jButtonGoto.text")); // NOI18N
+		jButtonGoto.setToolTipText(bundle.getString("JPanelSite.jButtonGoto.toolTipText")); // NOI18N
+		jButtonGoto.setMaximumSize(null);
+		jButtonGoto.setMinimumSize(null);
+		jButtonGoto.setName("jButtonGoto"); // NOI18N
+		jButtonGoto.setPreferredSize(new java.awt.Dimension(36, 36));
+		jButtonGoto.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
+				jButtonGotoActionPerformed(evt);
+			}
+		});
 
-        jLabel2.setText(bundle.getString("JPanelSite.jLabel2.text")); // NOI18N
-        jLabel2.setName("jLabel2"); // NOI18N
+		jLabel2.setText(bundle.getString("JPanelSite.jLabel2.text")); // NOI18N
+		jLabel2.setName("jLabel2"); // NOI18N
 
-        jTextFieldUser.setName("jTextFieldUser"); // NOI18N
+		jTextFieldUser.setName("jTextFieldUser"); // NOI18N
 
-        jButtonCopyUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/es/kinitrojavatech/geco/gui/icons/edit-copy.png"))); // NOI18N
-        jButtonCopyUser.setToolTipText(bundle.getString("JPanelSite.jButtonCopyUser.toolTipText")); // NOI18N
-        jButtonCopyUser.setMaximumSize(null);
-        jButtonCopyUser.setMinimumSize(null);
-        jButtonCopyUser.setName("jButtonCopyUser"); // NOI18N
-        jButtonCopyUser.setPreferredSize(new java.awt.Dimension(36, 36));
-        jButtonCopyUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCopyUserActionPerformed(evt);
-            }
-        });
+		jButtonCopyUser.setIcon(
+				new javax.swing.ImageIcon(getClass().getResource("/es/kinitrojavatech/geco/gui/icons/edit-copy.png"))); // NOI18N
+		jButtonCopyUser.setToolTipText(bundle.getString("JPanelSite.jButtonCopyUser.toolTipText")); // NOI18N
+		jButtonCopyUser.setMaximumSize(null);
+		jButtonCopyUser.setMinimumSize(null);
+		jButtonCopyUser.setName("jButtonCopyUser"); // NOI18N
+		jButtonCopyUser.setPreferredSize(new java.awt.Dimension(36, 36));
+		jButtonCopyUser.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
+				jButtonCopyUserActionPerformed(evt);
+			}
+		});
 
-        jLabel3.setText(bundle.getString("JPanelSite.jLabel3.text")); // NOI18N
-        jLabel3.setName("jLabel3"); // NOI18N
+		jLabel3.setText(bundle.getString("JPanelSite.jLabel3.text")); // NOI18N
+		jLabel3.setName("jLabel3"); // NOI18N
 
-        jPasswordField.setName("jPasswordField"); // NOI18N
+		jPasswordField.setName("jPasswordField"); // NOI18N
 
-        jButtonCopyPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/es/kinitrojavatech/geco/gui/icons/edit-copy.png"))); // NOI18N
-        jButtonCopyPassword.setToolTipText(bundle.getString("JPanelSite.jButtonCopyPassword.toolTipText")); // NOI18N
-        jButtonCopyPassword.setName("jButtonCopyPassword"); // NOI18N
-        jButtonCopyPassword.setPreferredSize(new java.awt.Dimension(36, 36));
-        jButtonCopyPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCopyPasswordActionPerformed(evt);
-            }
-        });
+		jButtonCopyPassword.setIcon(
+				new javax.swing.ImageIcon(getClass().getResource("/es/kinitrojavatech/geco/gui/icons/edit-copy.png"))); // NOI18N
+		jButtonCopyPassword.setToolTipText(bundle.getString("JPanelSite.jButtonCopyPassword.toolTipText")); // NOI18N
+		jButtonCopyPassword.setName("jButtonCopyPassword"); // NOI18N
+		jButtonCopyPassword.setPreferredSize(new java.awt.Dimension(36, 36));
+		jButtonCopyPassword.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
+				jButtonCopyPasswordActionPerformed(evt);
+			}
+		});
 
-        jButtonCalc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/es/kinitrojavatech/geco/gui/icons/accessories-calculator.png"))); // NOI18N
-        jButtonCalc.setText(bundle.getString("JPanelSite.jButtonCalc.text")); // NOI18N
-        jButtonCalc.setToolTipText(bundle.getString("JPanelSite.jButtonCalc.toolTipText")); // NOI18N
-        jButtonCalc.setName("jButtonCalc"); // NOI18N
-        jButtonCalc.setPreferredSize(new java.awt.Dimension(36, 36));
-        jButtonCalc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCalcActionPerformed(evt);
-            }
-        });
+		jButtonCalc.setIcon(new javax.swing.ImageIcon(
+				getClass().getResource("/es/kinitrojavatech/geco/gui/icons/accessories-calculator.png"))); // NOI18N
+		jButtonCalc.setText(bundle.getString("JPanelSite.jButtonCalc.text")); // NOI18N
+		jButtonCalc.setToolTipText(bundle.getString("JPanelSite.jButtonCalc.toolTipText")); // NOI18N
+		jButtonCalc.setName("jButtonCalc"); // NOI18N
+		jButtonCalc.setPreferredSize(new java.awt.Dimension(36, 36));
+		jButtonCalc.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
+				jButtonCalcActionPerformed(evt);
+			}
+		});
 
-        jCheckBoxShowPasswd.setText(bundle.getString("JPanelSite.jCheckBoxShowPasswd.text")); // NOI18N
-        jCheckBoxShowPasswd.setToolTipText(bundle.getString("JPanelSite.jCheckBoxShowPasswd.toolTipText")); // NOI18N
-        jCheckBoxShowPasswd.setName("jCheckBoxShowPasswd"); // NOI18N
-        jCheckBoxShowPasswd.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jCheckBoxShowPasswdStateChanged(evt);
-            }
-        });
+		jCheckBoxShowPasswd.setText(bundle.getString("JPanelSite.jCheckBoxShowPasswd.text")); // NOI18N
+		jCheckBoxShowPasswd.setToolTipText(bundle.getString("JPanelSite.jCheckBoxShowPasswd.toolTipText")); // NOI18N
+		jCheckBoxShowPasswd.setName("jCheckBoxShowPasswd"); // NOI18N
+		jCheckBoxShowPasswd.addChangeListener(new javax.swing.event.ChangeListener() {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
+				jCheckBoxShowPasswdStateChanged(evt);
+			}
+		});
 
-        jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("JPanelSite.jScrollPane2.border.title"))); // NOI18N
-        jScrollPane2.setName("jScrollPane2"); // NOI18N
+		jScrollPane2.setBorder(
+				javax.swing.BorderFactory.createTitledBorder(bundle.getString("JPanelSite.jScrollPane2.border.title"))); // NOI18N
+		jScrollPane2.setName("jScrollPane2"); // NOI18N
 
-        jTextAreaConfirmation.setColumns(20);
-        jTextAreaConfirmation.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-        jTextAreaConfirmation.setRows(4);
-        jTextAreaConfirmation.setTabSize(4);
-        jTextAreaConfirmation.setName("jTextAreaConfirmation"); // NOI18N
-        jScrollPane2.setViewportView(jTextAreaConfirmation);
+		jTextAreaConfirmation.setColumns(20);
+		jTextAreaConfirmation.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+		jTextAreaConfirmation.setRows(4);
+		jTextAreaConfirmation.setTabSize(4);
+		jTextAreaConfirmation.setName("jTextAreaConfirmation"); // NOI18N
+		jScrollPane2.setViewportView(jTextAreaConfirmation);
 
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("JPanelSite.jScrollPane1.border.title"))); // NOI18N
-        jScrollPane1.setName("jScrollPane1"); // NOI18N
+		jScrollPane1.setBorder(
+				javax.swing.BorderFactory.createTitledBorder(bundle.getString("JPanelSite.jScrollPane1.border.title"))); // NOI18N
+		jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        jTextAreaOptionalInfo.setColumns(20);
-        jTextAreaOptionalInfo.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-        jTextAreaOptionalInfo.setRows(5);
-        jTextAreaOptionalInfo.setTabSize(4);
-        jTextAreaOptionalInfo.setBorder(null);
-        jTextAreaOptionalInfo.setName("jTextAreaOptionalInfo"); // NOI18N
-        jScrollPane1.setViewportView(jTextAreaOptionalInfo);
+		jTextAreaOptionalInfo.setColumns(20);
+		jTextAreaOptionalInfo.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+		jTextAreaOptionalInfo.setRows(5);
+		jTextAreaOptionalInfo.setTabSize(4);
+		jTextAreaOptionalInfo.setBorder(null);
+		jTextAreaOptionalInfo.setName("jTextAreaOptionalInfo"); // NOI18N
+		jScrollPane1.setViewportView(jTextAreaOptionalInfo);
 
-        jButtonUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/es/kinitrojavatech/geco/gui/icons/gtk-edit.png"))); // NOI18N
-        jButtonUpdate.setText(bundle.getString("JPanelSite.jButtonUpdate.text")); // NOI18N
-        jButtonUpdate.setName("jButtonUpdate"); // NOI18N
-        jButtonUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonUpdateActionPerformed(evt);
-            }
-        });
+		jButtonUpdate.setIcon(
+				new javax.swing.ImageIcon(getClass().getResource("/es/kinitrojavatech/geco/gui/icons/gtk-edit.png"))); // NOI18N
+		jButtonUpdate.setText(bundle.getString("JPanelSite.jButtonUpdate.text")); // NOI18N
+		jButtonUpdate.setName("jButtonUpdate"); // NOI18N
+		jButtonUpdate.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
+				jButtonUpdateActionPerformed(evt);
+			}
+		});
 
-        jLabelSiteName.setText(bundle.getString("JPanelSite.jLabelSiteName.text")); // NOI18N
-        jLabelSiteName.setName("jLabelSiteName"); // NOI18N
+		jLabelSiteName.setText(bundle.getString("JPanelSite.jLabelSiteName.text")); // NOI18N
+		jLabelSiteName.setName("jLabelSiteName"); // NOI18N
 
-        jTextFieldName.setText(bundle.getString("JPanelSite.jTextFieldName.text")); // NOI18N
-        jTextFieldName.setName("jTextFieldName"); // NOI18N
+		jTextFieldName.setText(bundle.getString("JPanelSite.jTextFieldName.text")); // NOI18N
+		jTextFieldName.setName("jTextFieldName"); // NOI18N
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jLabelSiteName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldName))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldUrl)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonGoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPasswordField)
-                            .addComponent(jTextFieldUser, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonCopyUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButtonCopyPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonCalc, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jCheckBoxShowPasswd))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 317, Short.MAX_VALUE)
-                .addComponent(jButtonUpdate)
-                .addGap(314, 314, 314))
-            .addComponent(jScrollPane1)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelSiteName)
-                    .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonGoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextFieldUrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonCopyUser, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonCopyPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3))
-                    .addComponent(jButtonCalc, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBoxShowPasswd)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonUpdate)
-                .addContainerGap())
-        );
-    }// </editor-fold>//GEN-END:initComponents
+		final javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+		setLayout(layout);
+		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+						layout.createSequentialGroup()
+								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+										.addGroup(javax.swing.GroupLayout.Alignment.LEADING,
+												layout.createSequentialGroup().addComponent(jLabelSiteName)
+														.addPreferredGap(
+																javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+												.addComponent(jTextFieldName))
+										.addGroup(layout.createSequentialGroup().addComponent(jLabel2)
+												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+												.addComponent(jTextFieldUrl)))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jButtonGoto,
+								javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+								javax.swing.GroupLayout.PREFERRED_SIZE))
+				.addGroup(layout.createSequentialGroup()
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addGroup(layout.createSequentialGroup()
+										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+												.addComponent(jLabel3).addComponent(jLabel1))
+								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+										.addComponent(jPasswordField).addComponent(jTextFieldUser,
+												javax.swing.GroupLayout.PREFERRED_SIZE, 222,
+												javax.swing.GroupLayout.PREFERRED_SIZE))
+								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+										.addComponent(jButtonCopyUser, javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addGroup(layout.createSequentialGroup()
+												.addComponent(jButtonCopyPassword,
+														javax.swing.GroupLayout.PREFERRED_SIZE, 36,
+														javax.swing.GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+												.addComponent(jButtonCalc, javax.swing.GroupLayout.PREFERRED_SIZE, 36,
+														javax.swing.GroupLayout.PREFERRED_SIZE))))
+						.addComponent(jCheckBoxShowPasswd))
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+						layout.createSequentialGroup().addGap(0, 317, Short.MAX_VALUE).addComponent(jButtonUpdate)
+								.addGap(314, 314, 314))
+				.addComponent(jScrollPane1).addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING));
+		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(jLabelSiteName).addComponent(jTextFieldName,
+										javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+										javax.swing.GroupLayout.PREFERRED_SIZE))
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addComponent(jButtonGoto, javax.swing.GroupLayout.PREFERRED_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+								layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+										.addComponent(jTextFieldUrl, javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(jLabel2)))
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+						.addComponent(jButtonCopyUser, javax.swing.GroupLayout.PREFERRED_SIZE, 36,
+								javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addComponent(jTextFieldUser, javax.swing.GroupLayout.PREFERRED_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addComponent(jLabel1))
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+						.addComponent(jButtonCopyPassword, javax.swing.GroupLayout.PREFERRED_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(jLabel3))
+						.addComponent(jButtonCalc, javax.swing.GroupLayout.PREFERRED_SIZE, 34,
+								javax.swing.GroupLayout.PREFERRED_SIZE))
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(jCheckBoxShowPasswd)
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(jScrollPane2)
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+				.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 131,
+						javax.swing.GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jButtonUpdate)
+				.addContainerGap()));
+	}// </editor-fold>//GEN-END:initComponents
 
 	private void jButtonGotoActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonGotoActionPerformed
-		final Runtime rt = Runtime.getRuntime();
+		String url = jTextFieldUrl.getText();
+		if (!url.contains("://")) {
+			url = "http://" + url;
+		}
 		try {
-			rt.exec(new String[] { "firefox", jTextFieldUrl.getText() });
-		} catch (final IOException ex) {
-			Logger.getLogger(JPanelSite.class.getName()).log(Level.SEVERE, null, ex);
+			DesktopIntegration.getDesktop().browse(url);
+		} catch (URISyntaxException | IOException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage(), "Error abriendo navegador por defecto",
+					JOptionPane.ERROR_MESSAGE);
 		}
 	}// GEN-LAST:event_jButtonGotoActionPerformed
 
@@ -351,24 +379,24 @@ public class JPanelSite extends javax.swing.JPanel {
 		clipboard.setContents(data, data);
 	}// GEN-LAST:event_jButtonCopyPasswordActionPerformed
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCalc;
-    private javax.swing.JButton jButtonCopyPassword;
-    private javax.swing.JButton jButtonCopyUser;
-    private javax.swing.JButton jButtonGoto;
-    private javax.swing.JButton jButtonUpdate;
-    private javax.swing.JCheckBox jCheckBoxShowPasswd;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabelSiteName;
-    private javax.swing.JPasswordField jPasswordField;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextAreaConfirmation;
-    private javax.swing.JTextArea jTextAreaOptionalInfo;
-    private javax.swing.JTextField jTextFieldName;
-    private javax.swing.JTextField jTextFieldUrl;
-    private javax.swing.JTextField jTextFieldUser;
-    // End of variables declaration//GEN-END:variables
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JButton jButtonCalc;
+	private javax.swing.JButton jButtonCopyPassword;
+	private javax.swing.JButton jButtonCopyUser;
+	private javax.swing.JButton jButtonGoto;
+	private javax.swing.JButton jButtonUpdate;
+	private javax.swing.JCheckBox jCheckBoxShowPasswd;
+	private javax.swing.JLabel jLabel1;
+	private javax.swing.JLabel jLabel2;
+	private javax.swing.JLabel jLabel3;
+	private javax.swing.JLabel jLabelSiteName;
+	private javax.swing.JPasswordField jPasswordField;
+	private javax.swing.JScrollPane jScrollPane1;
+	private javax.swing.JScrollPane jScrollPane2;
+	private javax.swing.JTextArea jTextAreaConfirmation;
+	private javax.swing.JTextArea jTextAreaOptionalInfo;
+	private javax.swing.JTextField jTextFieldName;
+	private javax.swing.JTextField jTextFieldUrl;
+	private javax.swing.JTextField jTextFieldUser;
+	// End of variables declaration//GEN-END:variables
 }
