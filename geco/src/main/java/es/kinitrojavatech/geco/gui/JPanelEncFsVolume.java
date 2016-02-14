@@ -230,7 +230,7 @@ public class JPanelEncFsVolume extends javax.swing.JPanel {
 	private void jButtonBrowseMountPointActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonBrowseMountPointActionPerformed
 		final File folder = chooseFolder("Punto de montaje");
 		if (folder != null) {
-			jTextFieldPath.setText(folder.getAbsolutePath());
+			jTextFieldMountPoint.setText(folder.getAbsolutePath());
 		}
 	}// GEN-LAST:event_jButtonBrowseMountPointActionPerformed
 
@@ -241,7 +241,7 @@ public class JPanelEncFsVolume extends javax.swing.JPanel {
 	private void jButtonBrowsePathActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonBrowsePathActionPerformed
 		final File folder = chooseFolder("Carpeta compartida");
 		if (folder != null) {
-			jTextFieldMountPoint.setText(folder.getAbsolutePath());
+			jTextFieldPath.setText(folder.getAbsolutePath());
 		}
 	}// GEN-LAST:event_jButtonBrowsePathActionPerformed
 

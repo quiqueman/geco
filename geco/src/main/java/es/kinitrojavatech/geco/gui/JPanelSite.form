@@ -318,6 +318,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="jButtonUpdate">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/es/kinitrojavatech/geco/gui/icons/gtk-edit.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
           <ResourceString bundle="es/kinitrojavatech/geco/gui/Bundle.properties" key="JPanelSite.jButtonUpdate.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
         </Property>
