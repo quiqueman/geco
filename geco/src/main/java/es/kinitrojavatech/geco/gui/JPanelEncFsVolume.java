@@ -64,13 +64,7 @@ public class JPanelEncFsVolume extends javax.swing.JPanel {
 			jTextFieldName.setVisible(false);
 			jLabelName.setVisible(false);
 		}
-		if (isMounted) {
-			jButtonMount.setEnabled(false);
-			jButtonUnmount.setEnabled(true);
-		} else {
-			jButtonMount.setEnabled(true);
-			jButtonUnmount.setEnabled(false);
-		}
+		changeMountedStatus(isMounted);
 	}
 
 	/**
@@ -290,7 +284,7 @@ public class JPanelEncFsVolume extends javax.swing.JPanel {
 			}
 		}
 		try {
-			final String[] args = new String[] { "encfs",
+			final String[] args = new String[] { "encfs", "--standard",
 					"--extpass=echo " + String.valueOf(jPasswordField.getPassword()), jTextFieldPath.getText(),
 					mountPoint };
 			final int result = DesktopIntegration.getDesktop().execAndWait(args);
