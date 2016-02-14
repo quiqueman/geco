@@ -62,13 +62,19 @@ public class JPanelEncFsCollection extends javax.swing.JPanel {
 	}
 
 	private void initVolumesPanels() {
-		JPanelEncFsVolume jPanel = new JPanelEncFsVolume(new Volume());
+		JPanelEncFsVolume jPanel = new JPanelEncFsVolume(this, volumes, new Volume());
 		jTabbedPane1.add("Nuevo FS", jPanel);
 		if (volumes != null) {
 			for (final Volume volume : volumes.getVolume()) {
-				jPanel = new JPanelEncFsVolume(volume);
-				jTabbedPane1.add("Nuevo FS", jPanel);
+				jPanel = new JPanelEncFsVolume(this, volumes, volume);
+				jTabbedPane1.add(volume.getName(), jPanel);
 			}
 		}
+	}
+
+	public void addVolume(final Volume volume) {
+		final JPanelEncFsVolume panelEncFsVolume = new JPanelEncFsVolume(this, volumes, volume);
+		jTabbedPane1.add(volume.getName(), panelEncFsVolume);
+		jTabbedPane1.setSelectedIndex(jTabbedPane1.getTabCount() - 1);
 	}
 }

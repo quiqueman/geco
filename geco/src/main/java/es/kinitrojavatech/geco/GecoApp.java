@@ -283,6 +283,7 @@ public class GecoApp extends javax.swing.JFrame {
 			jLabelFilename.setText(file.getAbsolutePath());
 			reset();
 			initPanelPasswords();
+			initPanelEncFs();
 			pack();
 		}
 	}// GEN-LAST:event_jButtonOpenActionPerformed
