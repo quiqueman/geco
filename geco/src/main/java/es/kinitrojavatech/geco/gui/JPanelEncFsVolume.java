@@ -311,7 +311,7 @@ public class JPanelEncFsVolume extends javax.swing.JPanel {
 		} else {
 			jLabelStatus.setText("El sistema de ficheros está desmontado");
 		}
-
+		container.changeStatus(this, status);
 	}
 
 	private void jButtonBrowsePathActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonBrowsePathActionPerformed
