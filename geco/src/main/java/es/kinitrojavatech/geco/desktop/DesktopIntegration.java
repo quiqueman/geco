@@ -7,14 +7,15 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.LinkedList;
-import java.util.List;
 
 import javax.swing.JOptionPane;
 
 public class DesktopIntegration {
-	private static DesktopIntegration INSTANCE = new DesktopIntegration();
+	private final static DesktopIntegration INSTANCE = new DesktopIntegration();
 
 	private final Runtime runtime;
+
+	private LinkedList<String> mountedEncFs;
 
 	protected DesktopIntegration() {
 		runtime = Runtime.getRuntime();
@@ -56,8 +57,8 @@ public class DesktopIntegration {
 		}
 	}
 
-	public List<String> mountedEncFs() {
-		final List<String> result = new LinkedList<String>();
+	public void getMountedEncFs() {
+		mountedEncFs = new LinkedList<String>();
 		try {
 			final BufferedReader is = execWaitAndGetSysout(new String[] { "mount", "-l", "-t", "fuse.encfs" });
 			String line;
@@ -65,13 +66,17 @@ public class DesktopIntegration {
 				final int start = line.indexOf('/');
 				final int end = line.indexOf(' ', start);
 				line = line.substring(start, end);
-				System.err.println("'" + line + "'");
-				result.add(line);
+				mountedEncFs.add(line);
 			}
 		} catch (IOException | InterruptedException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Buscando EncFs montados", JOptionPane.ERROR_MESSAGE);
 		}
-		return result;
 	}
 
+	public boolean isEncFsMounted(final String mountPoint) {
+		if (mountedEncFs == null) {
+			getMountedEncFs();
+		}
+		return mountedEncFs.contains(mountPoint);
+	}
 }

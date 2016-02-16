@@ -16,7 +16,7 @@ public class JPanelCategory extends javax.swing.JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private Category category;
+	private final Category category;
 
 	/**
 	 * Creates new form JPanelSites
@@ -34,7 +34,7 @@ public class JPanelCategory extends javax.swing.JPanel {
 		return category;
 	}
 
-	public void addSite(final Category category, final Site site) {
+	public final void addSite(final Category category, final Site site) {
 		final JPanelSite panelPassword = new JPanelSite(this, category, site);
 		jTabbedPane1.add(panelPassword.getSiteName(), panelPassword);
 		jTabbedPane1.setSelectedIndex(jTabbedPane1.getTabCount() - 1);

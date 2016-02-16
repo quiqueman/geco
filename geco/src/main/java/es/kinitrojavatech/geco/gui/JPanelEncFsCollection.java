@@ -16,7 +16,7 @@
  */
 package es.kinitrojavatech.geco.gui;
 
-import java.util.List;
+import javax.swing.ImageIcon;
 
 import es.kinitrojavatech.geco.desktop.DesktopIntegration;
 import es.kinitrojavatech.geco.xml.EncryptedVolumes;
@@ -45,20 +45,21 @@ public class JPanelEncFsCollection extends javax.swing.JPanel {
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+	// <editor-fold defaultstate="collapsed" desc="Generated
+	// Code">//GEN-BEGIN:initComponents
+	private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+		jTabbedPane1 = new javax.swing.JTabbedPane();
 
-        setLayout(new java.awt.BorderLayout());
+		setLayout(new java.awt.BorderLayout());
 
-        jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
-        add(jTabbedPane1, java.awt.BorderLayout.CENTER);
-    }// </editor-fold>//GEN-END:initComponents
+		jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+		add(jTabbedPane1, java.awt.BorderLayout.CENTER);
+	}// </editor-fold>//GEN-END:initComponents
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTabbedPane jTabbedPane1;
-    // End of variables declaration//GEN-END:variables
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JTabbedPane jTabbedPane1;
+	// End of variables declaration//GEN-END:variables
 
 	public void init(final EncryptedVolumes volumes) {
 		this.volumes = volumes;
@@ -70,20 +71,32 @@ public class JPanelEncFsCollection extends javax.swing.JPanel {
 		JPanelEncFsVolume jPanel = new JPanelEncFsVolume(this, volumes, new Volume(), false);
 		jTabbedPane1.add("Nuevo FS", jPanel);
 		if (volumes != null) {
-			final List<String> mountedEncFs = DesktopIntegration.getDesktop().mountedEncFs();
 			for (final Volume volume : volumes.getVolume()) {
-				final boolean mounted = mountedEncFs.contains(volume.getMountPoint());
+				final boolean mounted = DesktopIntegration.getDesktop().isEncFsMounted(volume.getMountPoint());
 				jPanel = new JPanelEncFsVolume(this, volumes, volume, mounted);
 				jTabbedPane1.add(volume.getName(), jPanel);
+				changeStatus(jPanel, mounted);
 			}
 		}
 	}
 
 	public void addVolume(final Volume volume) {
-		final List<String> mountedEncFs = DesktopIntegration.getDesktop().mountedEncFs();
-		final boolean mounted = mountedEncFs.contains(volume.getMountPoint());
+		final boolean mounted = DesktopIntegration.getDesktop().isEncFsMounted(volume.getMountPoint());
 		final JPanelEncFsVolume panelEncFsVolume = new JPanelEncFsVolume(this, volumes, volume, mounted);
 		jTabbedPane1.add(volume.getName(), panelEncFsVolume);
 		jTabbedPane1.setSelectedIndex(jTabbedPane1.getTabCount() - 1);
+	}
+
+	public void changeStatus(final JPanelEncFsVolume panel, final boolean mounted) {
+		final int index = jTabbedPane1.indexOfComponent(panel);
+		if (index > -1) {
+			if (mounted) {
+				final ImageIcon icon = new ImageIcon(
+						getClass().getResource("/es/kinitrojavatech/geco/gui/icons/ok16.png"));
+				jTabbedPane1.setIconAt(index, icon);
+			} else {
+				jTabbedPane1.setIconAt(index, null);
+			}
+		}
 	}
 }
