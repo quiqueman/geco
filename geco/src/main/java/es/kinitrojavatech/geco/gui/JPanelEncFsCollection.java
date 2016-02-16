@@ -18,6 +18,8 @@ package es.kinitrojavatech.geco.gui;
 
 import javax.swing.ImageIcon;
 
+import javax.swing.ImageIcon;
+
 import es.kinitrojavatech.geco.desktop.DesktopIntegration;
 import es.kinitrojavatech.geco.xml.EncryptedVolumes;
 import es.kinitrojavatech.geco.xml.Volume;
