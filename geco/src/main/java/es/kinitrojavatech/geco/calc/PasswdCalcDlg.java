@@ -33,7 +33,10 @@ import javax.swing.KeyStroke;
  * @author quique
  */
 public class PasswdCalcDlg extends javax.swing.JDialog {
+	/** The return status. */
+	private int returnStatus = RET_CANCEL;
 
+	private static final String PROTOCOL_DELIMITER = "://";
 	/**
 	 *
 	 */
@@ -258,77 +261,34 @@ public class PasswdCalcDlg extends javax.swing.JDialog {
 	}
 
 	/**
-	 * @param args
-	 *            the command line arguments
+	 * Generate passwd.
+	 *
+	 * @param site
+	 *            the site
+	 * @param password
+	 *            the password
+	 * @return the string
 	 */
-	public static void main(final String args[]) {
-		/* Set the Nimbus look and feel */
-		// <editor-fold defaultstate="collapsed" desc=" Look and feel setting
-		// code (optional) ">
-		/*
-		 * If Nimbus (introduced in Java SE 6) is not available, stay with the
-		 * default look and feel. For details see
-		 * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.
-		 * html
-		 */
-		try {
-			for (final javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (final ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(PasswdCalcDlg.class.getName()).log(java.util.logging.Level.SEVERE, null,
-					ex);
-		} catch (final InstantiationException ex) {
-			java.util.logging.Logger.getLogger(PasswdCalcDlg.class.getName()).log(java.util.logging.Level.SEVERE, null,
-					ex);
-		} catch (final IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(PasswdCalcDlg.class.getName()).log(java.util.logging.Level.SEVERE, null,
-					ex);
-		} catch (final javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(PasswdCalcDlg.class.getName()).log(java.util.logging.Level.SEVERE, null,
-					ex);
-		}
-		// </editor-fold>
-
-		/* Create and display the dialog */
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				final PasswdCalcDlg dialog = new PasswdCalcDlg(new javax.swing.JFrame(), true, "");
-				dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-					@Override
-					public void windowClosing(final java.awt.event.WindowEvent e) {
-						System.exit(0);
-					}
-				});
-				dialog.setVisible(true);
-			}
-		});
-	}
-
 	public String generatePasswd(final String site, final String password) {
 		int counter = 0;
 		StringBuilder newPassword = new StringBuilder();
-		for (int i = 0; i < 7; i++) {
-			int c1 = 0;
-			if (i < password.length()) {
-				c1 = password.charAt(i);
+		for (int index = 0; index < 7; index++) {
+			int charPasswd = 0;
+			if (index < password.length()) {
+				charPasswd = password.charAt(index);
 			}
-			int c2 = 0;
-			if (i < site.length()) {
-				c2 = site.charAt(i);
+			int charUrl = 0;
+			if (index < site.length()) {
+				charUrl = site.charAt(index);
 			}
-			if (c1 > c2) {
-				newPassword.append((char) c1);
+			if (charPasswd > charUrl) {
+				newPassword.append((char) charPasswd);
 				counter++;
-			} else if (c1 < c2) {
-				final char c = (char) (c2 - 32);
+			} else if (charPasswd < charUrl) {
+				final char c = (char) (charUrl - 32);
 				newPassword.append(c);
 			} else {
-				newPassword.append(i);
+				newPassword.append(index);
 			}
 		}
 		newPassword = newPassword.append(counter);
@@ -347,8 +307,13 @@ public class PasswdCalcDlg extends javax.swing.JDialog {
 	private javax.swing.JButton okButton;
 	// End of variables declaration//GEN-END:variables
 
-	private int returnStatus = RET_CANCEL;
-
+	/**
+	 * Parses the url.
+	 *
+	 * @param url
+	 *            the url
+	 * @return the string
+	 */
 	static String parseUrl(final String url) {
 		if ((url != null) && !"".equals(url)) {
 			String result = url.toLowerCase();
@@ -361,6 +326,13 @@ public class PasswdCalcDlg extends javax.swing.JDialog {
 		}
 	}
 
+	/**
+	 * Gets the internet domain part of the url
+	 *
+	 * @param url
+	 *            the url
+	 * @return the domain
+	 */
 	private static String getDomain(final String url) {
 		final String[] parts = url.split("\\.");
 		if (parts.length > 1) {
@@ -370,8 +342,15 @@ public class PasswdCalcDlg extends javax.swing.JDialog {
 		}
 	}
 
+	/**
+	 * Removes the protocol part of the url
+	 *
+	 * @param url
+	 *            the url
+	 * @return the string
+	 */
 	private static String removeProtocol(final String url) {
-		final int i = url.indexOf("://");
+		final int i = url.indexOf(PROTOCOL_DELIMITER);
 		if (i > -1) {
 			return url.substring(i + 3);
 		} else {

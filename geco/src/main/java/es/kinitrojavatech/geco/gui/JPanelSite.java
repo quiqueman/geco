@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package es.kinitrojavatech.geco.gui;
 
 import java.awt.Toolkit;
@@ -19,14 +14,22 @@ import es.kinitrojavatech.geco.xml.Category;
 import es.kinitrojavatech.geco.xml.Site;
 
 /**
+ * The Class JPanelSite.
  *
  * @author quique
  */
 public class JPanelSite extends javax.swing.JPanel {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 4893755101948723944L;
+
+	/** The site. */
 	private Site site;
+
+	/** The category. */
 	private final Category category;
+
+	/** The site container. */
 	private final JPanelCategory siteContainer;
 
 	/**
