@@ -79,20 +79,11 @@ public class DataFile {
 			// que debemos pasar como bytes.
 			aes.init(mode, key);
 			return aes.doFinal(fileContent);
-		} catch (final NoSuchAlgorithmException e) {
-			throw new DataFileException(e.getMessage(), e);
-		} catch (final NoSuchPaddingException e) {
-			throw new DataFileException(e.getMessage(), e);
-		} catch (final InvalidKeyException e) {
-			throw new DataFileException(e.getMessage(), e);
-		} catch (final IllegalBlockSizeException e) {
+		} catch (final NoSuchAlgorithmException | IllegalBlockSizeException | InvalidKeyException
+				| UnsupportedEncodingException | NoSuchPaddingException e) {
 			throw new DataFileException(e.getMessage(), e);
 		} catch (final BadPaddingException e) {
 			throw new DataFileException("Password incorrecto", e);
-		} catch (final IllegalArgumentException e) {
-			throw new DataFileException(e.getMessage(), e);
-		} catch (final UnsupportedEncodingException e) {
-			throw new DataFileException(e.getMessage(), e);
 		}
 	}
 
@@ -109,10 +100,10 @@ public class DataFile {
 	}
 
 	public boolean open(final File file, final String passwd) {
-		try {
+
+		try (FileInputStream fileInput = new FileInputStream(file);
+				BufferedInputStream bufferedInput = new BufferedInputStream(fileInput);) {
 			final String tempPassword = checkMinLength(passwd, PASSWORD_LENGTH);
-			final FileInputStream fileInput = new FileInputStream(file);
-			final BufferedInputStream bufferedInput = new BufferedInputStream(fileInput);
 
 			final byte[] array = new byte[1024];
 			int read = bufferedInput.read(array);
@@ -128,30 +119,18 @@ public class DataFile {
 
 			final StringReader stringReader = new StringReader(result);
 
-			bufferedInput.close();
-			fileInput.close();
-
 			final JAXBContext context = JAXBContext.newInstance("es.kinitrojavatech.geco.xml");
 			final Unmarshaller unmarshaller = context.createUnmarshaller();
 			xml = (Geco) unmarshaller.unmarshal(stringReader);
 			setPassword(tempPassword);
 			openfile = file;
-		} catch (final JAXBException ex) {
-			JOptionPane.showMessageDialog(null, ex.getMessage(), "No se pudo abrir el fichero",
-					JOptionPane.ERROR_MESSAGE);
-			Logger.getLogger(DataFile.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-			return false;
-		} catch (final DataFileException ex) {
-			JOptionPane.showMessageDialog(null, ex.getMessage(), "No se pudo abrir el fichero",
-					JOptionPane.ERROR_MESSAGE);
-			Logger.getLogger(DataFile.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-			return false;
-		} catch (final IOException ex) {
+		} catch (final JAXBException | IOException | DataFileException ex) {
 			JOptionPane.showMessageDialog(null, ex.getMessage(), "No se pudo abrir el fichero",
 					JOptionPane.ERROR_MESSAGE);
 			Logger.getLogger(DataFile.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
 			return false;
 		}
+
 		return true;
 	}
 
@@ -167,16 +146,8 @@ public class DataFile {
 			output.write(cryptedText);
 			output.close();
 			modified = false;
-		} catch (final JAXBException ex) {
+		} catch (final JAXBException | DataFileException | IOException ex) {
 			JOptionPane.showMessageDialog(null, "No se pudo guardar el fichero", ex.getMessage(),
-					JOptionPane.ERROR_MESSAGE);
-			Logger.getLogger(DataFile.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-		} catch (final IOException ex) {
-			JOptionPane.showMessageDialog(null, "No se pudo guardar el fichero", ex.getMessage(),
-					JOptionPane.ERROR_MESSAGE);
-			Logger.getLogger(DataFile.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-		} catch (final DataFileException ex) {
-			JOptionPane.showMessageDialog(null, "No se pudo cifrar el fichero", ex.getMessage(),
 					JOptionPane.ERROR_MESSAGE);
 			Logger.getLogger(DataFile.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
 		}
