@@ -54,12 +54,14 @@ public class GecoApp extends javax.swing.JFrame {
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
+	// <editor-fold defaultstate="collapsed" desc="Generated
 	// Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
 		jToolBar1 = new javax.swing.JToolBar();
 		jButtonOpen = new javax.swing.JButton();
 		jButtonSave = new javax.swing.JButton();
+		jButtonChgPasswd = new javax.swing.JButton();
 		jButtonNewPasswdCategory = new javax.swing.JButton();
 		jButtonRenamePasswdCategory = new javax.swing.JButton();
 		jButtonPasswdCalc = new javax.swing.JButton();
@@ -118,6 +120,22 @@ public class GecoApp extends javax.swing.JFrame {
 			}
 		});
 		jToolBar1.add(jButtonSave);
+
+		jButtonChgPasswd.setIcon(new javax.swing.ImageIcon(
+				getClass().getResource("/es/kinitrojavatech/geco/gui/icons/stock_keyring.png"))); // NOI18N
+		jButtonChgPasswd.setText(bundle.getString("GecoApp.jButtonChgPasswd.text")); // NOI18N
+		jButtonChgPasswd.setFocusable(false);
+		jButtonChgPasswd.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+		jButtonChgPasswd.setName("jButtonChgPasswd"); // NOI18N
+		jButtonChgPasswd.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+		jButtonChgPasswd.setEnabled(false);
+		jButtonChgPasswd.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
+				jButtonChgPasswdActionPerformed(evt);
+			}
+		});
+		jToolBar1.add(jButtonChgPasswd);
 
 		jButtonNewPasswdCategory.setIcon(
 				new javax.swing.ImageIcon(getClass().getResource("/es/kinitrojavatech/geco/gui/icons/folder-new.png"))); // NOI18N
@@ -243,6 +261,26 @@ public class GecoApp extends javax.swing.JFrame {
 		setLocationRelativeTo(null);
 	}// </editor-fold>//GEN-END:initComponents
 
+	private void jButtonChgPasswdActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonChgPasswdActionPerformed
+		if (JOptionPane.showConfirmDialog(this,
+				"Vas a cambiar el password. Si olvidas esta contraseña el fichero no se podrá recuperar. ¿Estás seguro?",
+				"Confirmación de cambio de password", JOptionPane.YES_NO_OPTION) == JOptionPane.OK_OPTION) {
+			final JPasswordField jPasswdField = new JPasswordField(10);
+			final int result = JOptionPane.showConfirmDialog(this, jPasswdField, "Introduce el password",
+					JOptionPane.OK_CANCEL_OPTION);
+			if (result == JOptionPane.OK_OPTION) {
+				password = String.valueOf(jPasswdField.getPassword());
+				try {
+					dataFile.setPassword(password);
+				} catch (final DataFileException e) {
+					JOptionPane.showMessageDialog(this, "El password es inválido", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				save();
+			}
+		}
+
+	}// GEN-LAST:event_jButtonChgPasswdActionPerformed
+
 	private void jButtonPasswdCalcActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonPasswdCalcActionPerformed
 		final PasswdCalcDlg dlg = new PasswdCalcDlg(this, true, "");
 		dlg.setVisible(true);
@@ -284,6 +322,7 @@ public class GecoApp extends javax.swing.JFrame {
 			reset();
 			initPanelPasswords();
 			initPanelEncFs();
+			jButtonChgPasswd.setEnabled(true);
 			pack();
 		}
 	}// GEN-LAST:event_jButtonOpenActionPerformed
@@ -397,6 +436,7 @@ public class GecoApp extends javax.swing.JFrame {
 	private DataFile dataFile;
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
+	javax.swing.JButton jButtonChgPasswd;
 	javax.swing.JButton jButtonNewPasswdCategory;
 	javax.swing.JButton jButtonOpen;
 	javax.swing.JButton jButtonPasswdCalc;
