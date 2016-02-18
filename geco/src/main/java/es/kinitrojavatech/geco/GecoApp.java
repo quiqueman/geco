@@ -29,8 +29,6 @@ public class GecoApp extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	private String password;
-
 	/**
 	 * Creates new form GecoApp
 	 */
@@ -269,7 +267,7 @@ public class GecoApp extends javax.swing.JFrame {
 			final int result = JOptionPane.showConfirmDialog(this, jPasswdField, "Introduce el password",
 					JOptionPane.OK_CANCEL_OPTION);
 			if (result == JOptionPane.OK_OPTION) {
-				password = String.valueOf(jPasswdField.getPassword());
+				final String password = String.valueOf(jPasswdField.getPassword());
 				try {
 					dataFile.setPassword(password);
 				} catch (final DataFileException e) {
@@ -370,7 +368,7 @@ public class GecoApp extends javax.swing.JFrame {
 			chooser.setFileFilter(filter);
 			final int returnVal = chooser.showOpenDialog(this);
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				password = JOptionPane.showInputDialog(this, "Introduce el password", "Password",
+				final String password = JOptionPane.showInputDialog(this, "Introduce el password", "Password",
 						JOptionPane.QUESTION_MESSAGE);
 				if (password != null) {
 					try {
@@ -460,11 +458,12 @@ public class GecoApp extends javax.swing.JFrame {
 		final int returnVal = chooser.showOpenDialog(this);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			dataFile = new DataFile();
+
 			final JPasswordField jPasswdField = new JPasswordField(10);
 			final int result = JOptionPane.showConfirmDialog(this, jPasswdField, "Introduce el password",
 					JOptionPane.OK_CANCEL_OPTION);
 			if (result == JOptionPane.OK_OPTION) {
-				password = String.valueOf(jPasswdField.getPassword());
+				final String password = String.valueOf(jPasswdField.getPassword());
 				final File file = chooser.getSelectedFile();
 				if (dataFile.open(file, password)) {
 					return file;
