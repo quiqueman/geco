@@ -25,7 +25,7 @@ public class DesktopIntegration {
 		return INSTANCE;
 	}
 
-	public int execAndWait(final String[] args) throws IOException, InterruptedException {
+	private int execAndWait(final String[] args) throws IOException, InterruptedException {
 		final Process process = runtime.exec(args);
 		return process.waitFor();
 	}
@@ -78,5 +78,18 @@ public class DesktopIntegration {
 			getMountedEncFs();
 		}
 		return mountedEncFs.contains(mountPoint);
+	}
+
+	public int mountEncFs(final String encFsPath, final String mountPoint, final char[] cs)
+			throws IOException, InterruptedException {
+		final String[] args = new String[] { "encfs", "--standard", "--extpass=echo " + String.valueOf(cs), encFsPath,
+				mountPoint };
+		return DesktopIntegration.getDesktop().execAndWait(args);
+
+	}
+
+	public int unmountEncFs(final String mountPath) throws IOException, InterruptedException {
+		final String[] args = new String[] { "fusermount", "-u", mountPath };
+		return DesktopIntegration.getDesktop().execAndWait(args);
 	}
 }

@@ -244,8 +244,8 @@ public class JPanelEncFsVolume extends javax.swing.JPanel {
 
 	private void jButtonUnmountActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonUnmountActionPerformed
 		try {
-			final String[] args = new String[] { "fusermount", "-u", jTextFieldMountPoint.getText() };
-			final int result = DesktopIntegration.getDesktop().execAndWait(args);
+			// TODO: comprobar que el path existe, por si acaso
+			final int result = DesktopIntegration.getDesktop().unmountEncFs(jTextFieldMountPoint.getText());
 			if (result == 0) {
 				changeMountedStatus(false);
 			}
@@ -284,10 +284,8 @@ public class JPanelEncFsVolume extends javax.swing.JPanel {
 			}
 		}
 		try {
-			final String[] args = new String[] { "encfs", "--standard",
-					"--extpass=echo " + String.valueOf(jPasswordField.getPassword()), jTextFieldPath.getText(),
-					mountPoint };
-			final int result = DesktopIntegration.getDesktop().execAndWait(args);
+			final int result = DesktopIntegration.getDesktop().mountEncFs(jTextFieldPath.getText(), mountPoint,
+					jPasswordField.getPassword());
 			if (result == 0) {
 				DesktopIntegration.getDesktop().browse("file://" + jTextFieldMountPoint.getText());
 				changeMountedStatus(true);
